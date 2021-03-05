@@ -13,12 +13,12 @@
     
     Context 'Test if function is loaded' { 
         It "Test that the function is loaded" {
-            Test-Path function:$functionName | Should -Be $true
+            Test-Path function:$functionName | Should -Be $true -ErrorAction Stop
         }
     }
     Context 'See if languagefiles exists' {
         It 'Test en-US pson exists' {
-            $enUSPath | Should -Exist
+            $enUSPath | Should -Exist -ErrorAction Stop
         }
     }
     Context 'Get some standard texts' -Tag 'StandardText' {

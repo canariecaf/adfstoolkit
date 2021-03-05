@@ -15,7 +15,7 @@
 
     Context 'Test if function is loaded' { 
         It "Test that the function is loaded" {
-            Test-Path function:$functionName | Should -Be $true
+            Test-Path function:$functionName | Should -Be $true -ErrorAction Stop
         }
     }
     Context 'Create a new directory' {
