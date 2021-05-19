@@ -18,7 +18,7 @@
   </claimsProviders>
   <staticValues>
     <o>University Of Example</o>
-    <co>Fantasia</co>
+    <co>Fantasia United</co>
     <c>FU</c>
     <schacHomeOrganization>universityofexample.edu</schacHomeOrganization>
     <norEduOrgAcronym>UoE</norEduOrgAcronym>
@@ -35,10 +35,10 @@
   <storeConfig>
     <stores>
       <store name="Active Directory" storetype="Active Directory" issuer="AD AUTHORITY" type="http://schemas.microsoft.com/ws/2008/06/identity/claims/windowsaccountname" order="1" />
-      <!--<store name="Custom Store" storetype="Custom Store" issuer="AD AUTHORITY" type="http://schemas.microsoft.com/ws/2008/06/identity/claims/windowsaccountname" order="2" />-->
-      <!-- <store name="SQL" storetype="SQL" issuer="AD AUTHORITY" type="http://schemas.microsoft.com/ws/2008/06/identity/claims/windowsaccountname" order="3">
-                <query>SELECT CONVERT(varchar(10), Id) FROM [LiUDB].[dbo].[EmployeeIdGen] WHERE uid = REPLACE({0}, 'TEST\', '')</query>
-            </store> -->
+      <store name="Test Custom Store" storetype="Custom Store" issuer="AD AUTHORITY" type="http://schemas.microsoft.com/ws/2008/06/identity/claims/windowsaccountname" order="2" />
+      <store name="Test SQL" storetype="SQL" issuer="AD AUTHORITY" type="http://schemas.microsoft.com/ws/2008/06/identity/claims/windowsaccountname" order="3">
+                <query>SELECT CONVERT(varchar(10), Id) FROM myTable WHERE uid = REPLACE({0}, 'EDU\', '')</query>
+      </store>
     </stores>
   </storeConfig>
   <transformRules>
@@ -47,53 +47,12 @@
   <attributes>
     <attribute type="http://schemas.xmlsoap.org/ws/2005/05/identity/claims/givenname" store="Active Directory" name="givenname" />
     <attribute type="http://schemas.xmlsoap.org/ws/2005/05/identity/claims/surname" store="Active Directory" name="sn" />
-    <attribute type="http://schemas.xmlsoap.org/ws/2005/05/identity/claims/displayname" store="Active Directory" name="displayname" />
+    <attribute type="http://schemas.xmlsoap.org/ws/2005/05/identity/claims/displayname" store="Test Custom Store" name="displayname" />
     <attribute type="http://schemas.xmlsoap.org/claims/CommonName" store="Active Directory" name="cn" />
     <attribute type="http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name" store="Active Directory" name="name" />
-    <attribute type="http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress" store="Active Directory" name="mail" />
-    <!-- eduPersonAffilation and eduPersonScopedAffiliation settings
-                Scenario A. Static assignement with all active users declared 'member' (default)
-                Scenario B. Dynamic assignment based on GroupSID
-                Scenario C. Attribute ssignment based on presence of eduPersonAffiliation in directory
-             
-             Note that EXAMPLE.COM is used where your domain scope is needed for easy search and replace for your domain.
-             This file is a template so commented out examples will NOT be updated
-            
-             
-             -->
-    <!-- Scenario A. Static assignment (default, comment out if you enable another technique
-             <attribute type="urn:mace:dir:attribute-def:eduPersonAffiliation" store="Static" >
-               <value>member</value>
-             </attribute>
-             end Scenario A. Static assignment -->
-    <!-- note that in this template this field will be dynamically updated by eduPersonAfilliation above by new-ADFSTkConfiguration baking in the domain
-              <attribute type="urn:mace:dir:attribute-def:eduPersonScopedAffiliation" store="Static" >
-              </attribute>
-             end Scenario A. Static assignment -->
-    <!-- Scenario B. Dynamic assignment 
-     <attribute type="urn:mace:dir:attribute-def:eduPersonAffiliation" store="Active Directory" name="eduPersonAffiliation" useGroups="true" claimOrigin="http://schemas.microsoft.com/ws/2008/06/identity/claims/groupsid">
-                <group name="SID-FOR-FACULTY-GROUP" value="faculty"/>
-                <group name="SID-FOR-STAFF-GROUP" value="staff"/>
-                <group name="SID-FOR-EMPLOYEE-GROUP" value="employee"/>
-                <group name="SID-FOR-STUDENT-GROUP" value="student"/>
-                <group name="SID-FOR-ALUM-GROUP" value="alum"/>
-                <group name="SID-FOR-AFFILIATE-GROUP" value="affiliate"/>
-                <group name="SID-FOR-MEMBER-GROUP" value="member"/>
-                <group name="SID-FOR-LIBRARYWALKIN-GROUP" value="library-walk-in"/>
-            </attribute>
-      <attribute type="urn:mace:dir:attribute-def:eduPersonScopedAffiliation" store="Active Directory" name="eduPersonScopedAffiliation" useGroups="true" claimOrigin="http://schemas.microsoft.com/ws/2008/06/identity/claims/groupsid" >
-                <group name="SID-FOR-FACULTY-GROUP" value="faculty@EXAMPLE.COM"/>
-                <group name="SID-FOR-STAFF-GROUP" value="staff@EXAMPLE.COM"/>
-                <group name="SID-FOR-EMPLOYEE-GROUP" value="employee@EXAMPLE.COM"/>
-                <group name="SID-FOR-STUDENT-GROUP" value="student@EXAMPLE.COM"/>
-                <group name="SID-FOR-ALUM-GROUP" value="alum@EXAMPLE.COM"/>
-                <group name="SID-FOR-AFFILIATE-GROUP" value="affiliate@EXAMPLE.COM"/>
-                <group name="SID-FOR-MEMBER-GROUP" value="member@EXAMPLE.COM"/>
-                <group name="SID-FOR-LIBRARYWALKIN-GROUP" value="library-walk-in@EXAMPLE.COM"/>
-        </attribute> 
-               end Scenario B. Dynamic assignment -->
-    <!-- Scenario C. Attribute assignment-->
-    <attribute type="urn:mace:dir:attribute-def:eduPersonAffiliation" store="Active Directory" name="eduPersonAffiliation">
+    <attribute type="http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress" store="Test SQL" />
+   
+       <attribute type="urn:mace:dir:attribute-def:eduPersonAffiliation" store="Test Custom Store" name="eduPersonAffiliation">
       <restrictedvalue>faculty</restrictedvalue>
       <restrictedvalue>staff</restrictedvalue>
       <restrictedvalue>employee</restrictedvalue>
@@ -103,7 +62,7 @@
       <restrictedvalue>member</restrictedvalue>
       <restrictedvalue>library-walk-in</restrictedvalue>
     </attribute>
-    <attribute type="urn:mace:dir:attribute-def:eduPersonScopedAffiliation" store="Active Directory" name="eduPersonScopedAffiliation">
+    <attribute type="urn:mace:dir:attribute-def:eduPersonScopedAffiliation" store="Test Custom Store" name="eduPersonScopedAffiliation">
       <restrictedvalue>faculty@universityofexample.edu</restrictedvalue>
       <restrictedvalue>staff@universityofexample.edu</restrictedvalue>
       <restrictedvalue>employee@universityofexample.edu</restrictedvalue>
@@ -113,20 +72,15 @@
       <restrictedvalue>member@universityofexample.edu</restrictedvalue>
       <restrictedvalue>library-walk-in@universityofexample.edu</restrictedvalue>
     </attribute>
-    <!-- end Scenario C. Attribute assignment -->
-    <!-- Attribute filter pivoting on allowedRegistrationAuthorities - useful for GDPR purposes 
-
-             Absence of allowedRegsitrationAuthorities - no action taken
-             Presence of allowedRegistrationAuthorities - attribute filters to be present in only said RA (one or more)
-            -->
+   
     <attribute type="urn:mace:dir:attribute-def:norEduPersonNIN" store="Active Directory" name="norEduPersonNIN">
       <allowedRegistrationAuthorities>
-        <registrationAuthority>http://www.swamid.se/</registrationAuthority>
+        <registrationAuthority>http://adfstoolkit.org</registrationAuthority>
       </allowedRegistrationAuthorities>
     </attribute>
     <attribute type="urn:mace:dir:attribute-def:personalIdentityNumber" store="Active Directory" name="norEduPersonNIN">
       <allowedRegistrationAuthorities>
-        <registrationAuthority>http://www.swamid.se/</registrationAuthority>
+        <registrationAuthority>http://adfstoolkit.org</registrationAuthority>
       </allowedRegistrationAuthorities>
     </attribute>
     <attribute type="urn:mace:dir:attribute-def:schacDateOfBirth" store="Active Directory" name="norEduPersonNIN" />

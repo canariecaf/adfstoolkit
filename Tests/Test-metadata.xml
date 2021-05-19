@@ -20,11 +20,11 @@ Do not trust anything in this file, it is only for testing purposes!
         </mdrpi:PublicationInfo>
     </md:Extensions>
 
-    <md:EntityDescriptor entityID="https://test0.release-check.swamid.se/shibboleth">
+    <md:EntityDescriptor entityID="urn:adfstk:sp:test0">
         <!-- Test with SP without any EC -->
         <md:Extensions>
-            <mdrpi:RegistrationInfo registrationAuthority="http://www.swamid.se/">
-                <mdrpi:RegistrationPolicy xml:lang="en">http://swamid.se/policy/mdrps</mdrpi:RegistrationPolicy>
+            <mdrpi:RegistrationInfo registrationAuthority="http://adfstoolkit.org">
+                <mdrpi:RegistrationPolicy xml:lang="en">http://adfstoolkit.org/policy</mdrpi:RegistrationPolicy>
             </mdrpi:RegistrationInfo>
             <alg:DigestMethod xmlns:alg="urn:oasis:names:tc:SAML:metadata:algsupport" Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/>
             <alg:DigestMethod xmlns:alg="urn:oasis:names:tc:SAML:metadata:algsupport" Algorithm="http://www.w3.org/2001/04/xmldsig-more#sha384"/>
@@ -45,8 +45,8 @@ Do not trust anything in this file, it is only for testing purposes!
         </md:Extensions>
         <md:SPSSODescriptor protocolSupportEnumeration="urn:oasis:names:tc:SAML:2.0:protocol">
             <md:Extensions>
-                <init:RequestInitiator xmlns:init="urn:oasis:names:tc:SAML:profiles:SSO:request-init" Binding="urn:oasis:names:tc:SAML:profiles:SSO:request-init" Location="https://test0.release-check.swamid.se/Shibboleth.sso/Login"/>
-                <idpdisc:DiscoveryResponse xmlns:idpdisc="urn:oasis:names:tc:SAML:profiles:SSO:idp-discovery-protocol" Binding="urn:oasis:names:tc:SAML:profiles:SSO:idp-discovery-protocol" Location="https://test0.release-check.swamid.se/Shibboleth.sso/Login" index="1"/>
+                <init:RequestInitiator xmlns:init="urn:oasis:names:tc:SAML:profiles:SSO:request-init" Binding="urn:oasis:names:tc:SAML:profiles:SSO:request-init" Location="https://adfstoolkit.org/test0/Login"/>
+                <idpdisc:DiscoveryResponse xmlns:idpdisc="urn:oasis:names:tc:SAML:profiles:SSO:idp-discovery-protocol" Binding="urn:oasis:names:tc:SAML:profiles:SSO:idp-discovery-protocol" Location="https://adfstoolkit.org/test0/Login" index="1"/>
                 <mdui:UIInfo xmlns:mdui="urn:oasis:names:tc:SAML:metadata:ui">
                     <mdui:DisplayName xml:lang="sv">SWAMID Entity Category Release Check - EC verification</mdui:DisplayName>
                     <mdui:DisplayName xml:lang="en">SWAMID Entity Category Release Check - EC verification</mdui:DisplayName>
@@ -88,14 +88,14 @@ Do not trust anything in this file, it is only for testing purposes!
                 <md:EncryptionMethod Algorithm="http://www.w3.org/2009/xmlenc11#rsa-oaep"/>
                 <md:EncryptionMethod Algorithm="http://www.w3.org/2001/04/xmlenc#rsa-oaep-mgf1p"/>
             </md:KeyDescriptor>
-            <md:ArtifactResolutionService Binding="urn:oasis:names:tc:SAML:2.0:bindings:SOAP" Location="https://test0.release-check.swamid.se/Shibboleth.sso/Artifact/SOAP" index="1"/>
-            <md:SingleLogoutService Binding="urn:oasis:names:tc:SAML:2.0:bindings:SOAP" Location="https://test0.release-check.swamid.se/Shibboleth.sso/SLO/SOAP"/>
-            <md:SingleLogoutService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect" Location="https://test0.release-check.swamid.se/Shibboleth.sso/SLO/Redirect"/>
-            <md:SingleLogoutService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" Location="https://test0.release-check.swamid.se/Shibboleth.sso/SLO/POST"/>
-            <md:SingleLogoutService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Artifact" Location="https://test0.release-check.swamid.se/Shibboleth.sso/SLO/Artifact"/>
-            <md:AssertionConsumerService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" Location="https://test0.release-check.swamid.se/Shibboleth.sso/SAML2/POST" index="1"/>
-            <md:AssertionConsumerService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Artifact" Location="https://test0.release-check.swamid.se/Shibboleth.sso/SAML2/Artifact" index="3"/>
-            <md:AssertionConsumerService Binding="urn:oasis:names:tc:SAML:2.0:bindings:PAOS" Location="https://test0.release-check.swamid.se/Shibboleth.sso/SAML2/ECP" index="4"/>
+            <md:ArtifactResolutionService Binding="urn:oasis:names:tc:SAML:2.0:bindings:SOAP" Location="https://adfstoolkit.org/test0/Artifact/SOAP" index="1"/>
+            <md:SingleLogoutService Binding="urn:oasis:names:tc:SAML:2.0:bindings:SOAP" Location="https://adfstoolkit.org/test0/SLO/SOAP"/>
+            <md:SingleLogoutService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect" Location="https://adfstoolkit.org/test0/SLO/Redirect"/>
+            <md:SingleLogoutService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" Location="https://adfstoolkit.org/test0/SLO/POST"/>
+            <md:SingleLogoutService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Artifact" Location="https://adfstoolkit.org/test0/SLO/Artifact"/>
+            <md:AssertionConsumerService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" Location="https://adfstoolkit.org/test0/SAML2/POST" index="1"/>
+            <md:AssertionConsumerService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Artifact" Location="https://adfstoolkit.org/test0/SAML2/Artifact" index="3"/>
+            <md:AssertionConsumerService Binding="urn:oasis:names:tc:SAML:2.0:bindings:PAOS" Location="https://adfstoolkit.org/test0/SAML2/ECP" index="4"/>
         </md:SPSSODescriptor>
 
 
@@ -109,11 +109,11 @@ Do not trust anything in this file, it is only for testing purposes!
             <md:EmailAddress>mailto:operations@swamid.se</md:EmailAddress>
         </md:ContactPerson>
     </md:EntityDescriptor>
-    <md:EntityDescriptor entityID="https://test1.release-check.swamid.se/shibboleth">
+    <md:EntityDescriptor entityID="urn:adfstk:sp:test1">
         <!-- Test with SP without any EC -->
         <md:Extensions>
-            <mdrpi:RegistrationInfo registrationAuthority="http://www.swamid.se/">
-                <mdrpi:RegistrationPolicy xml:lang="en">http://swamid.se/policy/mdrps</mdrpi:RegistrationPolicy>
+            <mdrpi:RegistrationInfo registrationAuthority="http://adfstoolkit.org">
+                <mdrpi:RegistrationPolicy xml:lang="en">http://adfstoolkit.org/policy</mdrpi:RegistrationPolicy>
             </mdrpi:RegistrationInfo>
             <alg:DigestMethod xmlns:alg="urn:oasis:names:tc:SAML:metadata:algsupport" Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/>
             <alg:DigestMethod xmlns:alg="urn:oasis:names:tc:SAML:metadata:algsupport" Algorithm="http://www.w3.org/2001/04/xmldsig-more#sha384"/>
@@ -134,8 +134,8 @@ Do not trust anything in this file, it is only for testing purposes!
         </md:Extensions>
         <md:SPSSODescriptor protocolSupportEnumeration="urn:oasis:names:tc:SAML:2.0:protocol">
             <md:Extensions>
-                <init:RequestInitiator xmlns:init="urn:oasis:names:tc:SAML:profiles:SSO:request-init" Binding="urn:oasis:names:tc:SAML:profiles:SSO:request-init" Location="https://test1.release-check.swamid.se/Shibboleth.sso/Login"/>
-                <idpdisc:DiscoveryResponse xmlns:idpdisc="urn:oasis:names:tc:SAML:profiles:SSO:idp-discovery-protocol" Binding="urn:oasis:names:tc:SAML:profiles:SSO:idp-discovery-protocol" Location="https://test1.release-check.swamid.se/Shibboleth.sso/Login" index="1"/>
+                <init:RequestInitiator xmlns:init="urn:oasis:names:tc:SAML:profiles:SSO:request-init" Binding="urn:oasis:names:tc:SAML:profiles:SSO:request-init" Location="https://adfstoolkit.org/test1/Login"/>
+                <idpdisc:DiscoveryResponse xmlns:idpdisc="urn:oasis:names:tc:SAML:profiles:SSO:idp-discovery-protocol" Binding="urn:oasis:names:tc:SAML:profiles:SSO:idp-discovery-protocol" Location="https://adfstoolkit.org/test1/Login" index="1"/>
                 <mdui:UIInfo xmlns:mdui="urn:oasis:names:tc:SAML:metadata:ui">
                     <mdui:DisplayName xml:lang="sv">SWAMID Entity Category Release Check - No EC</mdui:DisplayName>
                     <mdui:DisplayName xml:lang="en">SWAMID Entity Category Release Check - No EC</mdui:DisplayName>
@@ -177,14 +177,14 @@ Do not trust anything in this file, it is only for testing purposes!
                 <md:EncryptionMethod Algorithm="http://www.w3.org/2009/xmlenc11#rsa-oaep"/>
                 <md:EncryptionMethod Algorithm="http://www.w3.org/2001/04/xmlenc#rsa-oaep-mgf1p"/>
             </md:KeyDescriptor>
-            <md:ArtifactResolutionService Binding="urn:oasis:names:tc:SAML:2.0:bindings:SOAP" Location="https://test1.release-check.swamid.se/Shibboleth.sso/Artifact/SOAP" index="1"/>
-            <md:SingleLogoutService Binding="urn:oasis:names:tc:SAML:2.0:bindings:SOAP" Location="https://test1.release-check.swamid.se/Shibboleth.sso/SLO/SOAP"/>
-            <md:SingleLogoutService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect" Location="https://test1.release-check.swamid.se/Shibboleth.sso/SLO/Redirect"/>
-            <md:SingleLogoutService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" Location="https://test1.release-check.swamid.se/Shibboleth.sso/SLO/POST"/>
-            <md:SingleLogoutService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Artifact" Location="https://test1.release-check.swamid.se/Shibboleth.sso/SLO/Artifact"/>
-            <md:AssertionConsumerService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" Location="https://test1.release-check.swamid.se/Shibboleth.sso/SAML2/POST" index="1"/>
-            <md:AssertionConsumerService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Artifact" Location="https://test1.release-check.swamid.se/Shibboleth.sso/SAML2/Artifact" index="3"/>
-            <md:AssertionConsumerService Binding="urn:oasis:names:tc:SAML:2.0:bindings:PAOS" Location="https://test1.release-check.swamid.se/Shibboleth.sso/SAML2/ECP" index="4"/>
+            <md:ArtifactResolutionService Binding="urn:oasis:names:tc:SAML:2.0:bindings:SOAP" Location="https://adfstoolkit.org/test1/Artifact/SOAP" index="1"/>
+            <md:SingleLogoutService Binding="urn:oasis:names:tc:SAML:2.0:bindings:SOAP" Location="https://adfstoolkit.org/test1/SLO/SOAP"/>
+            <md:SingleLogoutService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect" Location="https://adfstoolkit.org/test1/SLO/Redirect"/>
+            <md:SingleLogoutService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" Location="https://adfstoolkit.org/test1/SLO/POST"/>
+            <md:SingleLogoutService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Artifact" Location="https://adfstoolkit.org/test1/SLO/Artifact"/>
+            <md:AssertionConsumerService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" Location="https://adfstoolkit.org/test1/SAML2/POST" index="1"/>
+            <md:AssertionConsumerService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Artifact" Location="https://adfstoolkit.org/test1/SAML2/Artifact" index="3"/>
+            <md:AssertionConsumerService Binding="urn:oasis:names:tc:SAML:2.0:bindings:PAOS" Location="https://adfstoolkit.org/test1/SAML2/ECP" index="4"/>
         </md:SPSSODescriptor>
 
 
@@ -198,11 +198,11 @@ Do not trust anything in this file, it is only for testing purposes!
             <md:EmailAddress>mailto:operations@swamid.se</md:EmailAddress>
         </md:ContactPerson>
     </md:EntityDescriptor>
-    <md:EntityDescriptor entityID="https://test2.release-check.swamid.se/shibboleth">
+    <md:EntityDescriptor entityID="urn:adfstk:sp:test2">
         <!-- Test with SP with EC = Research and Scholarship-->
         <md:Extensions>
-            <mdrpi:RegistrationInfo registrationAuthority="http://www.swamid.se/">
-                <mdrpi:RegistrationPolicy xml:lang="en">http://swamid.se/policy/mdrps</mdrpi:RegistrationPolicy>
+            <mdrpi:RegistrationInfo registrationAuthority="http://adfstoolkit.org">
+                <mdrpi:RegistrationPolicy xml:lang="en">http://adfstoolkit.org/policy</mdrpi:RegistrationPolicy>
             </mdrpi:RegistrationInfo>
             <alg:DigestMethod xmlns:alg="urn:oasis:names:tc:SAML:metadata:algsupport" Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/>
             <alg:DigestMethod xmlns:alg="urn:oasis:names:tc:SAML:metadata:algsupport" Algorithm="http://www.w3.org/2001/04/xmldsig-more#sha384"/>
@@ -228,8 +228,8 @@ Do not trust anything in this file, it is only for testing purposes!
         </md:Extensions>
         <md:SPSSODescriptor protocolSupportEnumeration="urn:oasis:names:tc:SAML:2.0:protocol">
             <md:Extensions>
-                <init:RequestInitiator xmlns:init="urn:oasis:names:tc:SAML:profiles:SSO:request-init" Binding="urn:oasis:names:tc:SAML:profiles:SSO:request-init" Location="https://test2.release-check.swamid.se/Shibboleth.sso/Login"/>
-                <idpdisc:DiscoveryResponse xmlns:idpdisc="urn:oasis:names:tc:SAML:profiles:SSO:idp-discovery-protocol" Binding="urn:oasis:names:tc:SAML:profiles:SSO:idp-discovery-protocol" Location="https://test2.release-check.swamid.se/Shibboleth.sso/Login" index="1"/>
+                <init:RequestInitiator xmlns:init="urn:oasis:names:tc:SAML:profiles:SSO:request-init" Binding="urn:oasis:names:tc:SAML:profiles:SSO:request-init" Location="https://adfstoolkit.org/test2/Login"/>
+                <idpdisc:DiscoveryResponse xmlns:idpdisc="urn:oasis:names:tc:SAML:profiles:SSO:idp-discovery-protocol" Binding="urn:oasis:names:tc:SAML:profiles:SSO:idp-discovery-protocol" Location="https://adfstoolkit.org/test2/Login" index="1"/>
                 <mdui:UIInfo xmlns:mdui="urn:oasis:names:tc:SAML:metadata:ui">
                     <mdui:DisplayName xml:lang="sv">SWAMID Entity Category Release Check - REFEDS R and S</mdui:DisplayName>
                     <mdui:DisplayName xml:lang="en">SWAMID Entity Category Release Check - REFEDS R and S</mdui:DisplayName>
@@ -271,14 +271,14 @@ Do not trust anything in this file, it is only for testing purposes!
                 <md:EncryptionMethod Algorithm="http://www.w3.org/2009/xmlenc11#rsa-oaep"/>
                 <md:EncryptionMethod Algorithm="http://www.w3.org/2001/04/xmlenc#rsa-oaep-mgf1p"/>
             </md:KeyDescriptor>
-            <md:ArtifactResolutionService Binding="urn:oasis:names:tc:SAML:2.0:bindings:SOAP" Location="https://test2.release-check.swamid.se/Shibboleth.sso/Artifact/SOAP" index="1"/>
-            <md:SingleLogoutService Binding="urn:oasis:names:tc:SAML:2.0:bindings:SOAP" Location="https://test2.release-check.swamid.se/Shibboleth.sso/SLO/SOAP"/>
-            <md:SingleLogoutService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect" Location="https://test2.release-check.swamid.se/Shibboleth.sso/SLO/Redirect"/>
-            <md:SingleLogoutService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" Location="https://test2.release-check.swamid.se/Shibboleth.sso/SLO/POST"/>
-            <md:SingleLogoutService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Artifact" Location="https://test2.release-check.swamid.se/Shibboleth.sso/SLO/Artifact"/>
-            <md:AssertionConsumerService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" Location="https://test2.release-check.swamid.se/Shibboleth.sso/SAML2/POST" index="1"/>
-            <md:AssertionConsumerService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Artifact" Location="https://test2.release-check.swamid.se/Shibboleth.sso/SAML2/Artifact" index="3"/>
-            <md:AssertionConsumerService Binding="urn:oasis:names:tc:SAML:2.0:bindings:PAOS" Location="https://test2.release-check.swamid.se/Shibboleth.sso/SAML2/ECP" index="4"/>
+            <md:ArtifactResolutionService Binding="urn:oasis:names:tc:SAML:2.0:bindings:SOAP" Location="https://adfstoolkit.org/test2/Artifact/SOAP" index="1"/>
+            <md:SingleLogoutService Binding="urn:oasis:names:tc:SAML:2.0:bindings:SOAP" Location="https://adfstoolkit.org/test2/SLO/SOAP"/>
+            <md:SingleLogoutService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect" Location="https://adfstoolkit.org/test2/SLO/Redirect"/>
+            <md:SingleLogoutService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" Location="https://adfstoolkit.org/test2/SLO/POST"/>
+            <md:SingleLogoutService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Artifact" Location="https://adfstoolkit.org/test2/SLO/Artifact"/>
+            <md:AssertionConsumerService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" Location="https://adfstoolkit.org/test2/SAML2/POST" index="1"/>
+            <md:AssertionConsumerService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Artifact" Location="https://adfstoolkit.org/test2/SAML2/Artifact" index="3"/>
+            <md:AssertionConsumerService Binding="urn:oasis:names:tc:SAML:2.0:bindings:PAOS" Location="https://adfstoolkit.org/test2/SAML2/ECP" index="4"/>
         </md:SPSSODescriptor>
 
 
@@ -292,11 +292,11 @@ Do not trust anything in this file, it is only for testing purposes!
             <md:EmailAddress>mailto:operations@swamid.se</md:EmailAddress>
         </md:ContactPerson>
     </md:EntityDescriptor>
-    <md:EntityDescriptor entityID="https://test3.release-check.swamid.se/shibboleth">
+    <md:EntityDescriptor entityID="urn:adfstk:sp:test3">
         <!-- Test with SP with EC = Code of Conduct from SWAMID SP, part 1-->
         <md:Extensions>
-            <mdrpi:RegistrationInfo registrationAuthority="http://www.swamid.se/">
-                <mdrpi:RegistrationPolicy xml:lang="en">http://swamid.se/policy/mdrps</mdrpi:RegistrationPolicy>
+            <mdrpi:RegistrationInfo registrationAuthority="http://adfstoolkit.org">
+                <mdrpi:RegistrationPolicy xml:lang="en">http://adfstoolkit.org/policy</mdrpi:RegistrationPolicy>
             </mdrpi:RegistrationInfo>
             <alg:DigestMethod xmlns:alg="urn:oasis:names:tc:SAML:metadata:algsupport" Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/>
             <alg:DigestMethod xmlns:alg="urn:oasis:names:tc:SAML:metadata:algsupport" Algorithm="http://www.w3.org/2001/04/xmldsig-more#sha384"/>
@@ -322,8 +322,8 @@ Do not trust anything in this file, it is only for testing purposes!
         </md:Extensions>
         <md:SPSSODescriptor protocolSupportEnumeration="urn:oasis:names:tc:SAML:2.0:protocol">
             <md:Extensions>
-                <init:RequestInitiator xmlns:init="urn:oasis:names:tc:SAML:profiles:SSO:request-init" Binding="urn:oasis:names:tc:SAML:profiles:SSO:request-init" Location="https://test3.release-check.swamid.se/Shibboleth.sso/Login"/>
-                <idpdisc:DiscoveryResponse xmlns:idpdisc="urn:oasis:names:tc:SAML:profiles:SSO:idp-discovery-protocol" Binding="urn:oasis:names:tc:SAML:profiles:SSO:idp-discovery-protocol" Location="https://test3.release-check.swamid.se/Shibboleth.sso/Login" index="1"/>
+                <init:RequestInitiator xmlns:init="urn:oasis:names:tc:SAML:profiles:SSO:request-init" Binding="urn:oasis:names:tc:SAML:profiles:SSO:request-init" Location="https://adfstoolkit.org/test3/Login"/>
+                <idpdisc:DiscoveryResponse xmlns:idpdisc="urn:oasis:names:tc:SAML:profiles:SSO:idp-discovery-protocol" Binding="urn:oasis:names:tc:SAML:profiles:SSO:idp-discovery-protocol" Location="https://adfstoolkit.org/test3/Login" index="1"/>
                 <mdui:UIInfo xmlns:mdui="urn:oasis:names:tc:SAML:metadata:ui">
                     <mdui:DisplayName xml:lang="sv">SWAMID Entity Category Release Check - GÉANT CoCo del 1</mdui:DisplayName>
                     <mdui:DisplayName xml:lang="en">SWAMID Entity Category Release Check - GÉANT CoCo part 1</mdui:DisplayName>
@@ -365,14 +365,14 @@ Do not trust anything in this file, it is only for testing purposes!
                 <md:EncryptionMethod Algorithm="http://www.w3.org/2009/xmlenc11#rsa-oaep"/>
                 <md:EncryptionMethod Algorithm="http://www.w3.org/2001/04/xmlenc#rsa-oaep-mgf1p"/>
             </md:KeyDescriptor>
-            <md:ArtifactResolutionService Binding="urn:oasis:names:tc:SAML:2.0:bindings:SOAP" Location="https://test3.release-check.swamid.se/Shibboleth.sso/Artifact/SOAP" index="1"/>
-            <md:SingleLogoutService Binding="urn:oasis:names:tc:SAML:2.0:bindings:SOAP" Location="https://test3.release-check.swamid.se/Shibboleth.sso/SLO/SOAP"/>
-            <md:SingleLogoutService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect" Location="https://test3.release-check.swamid.se/Shibboleth.sso/SLO/Redirect"/>
-            <md:SingleLogoutService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" Location="https://test3.release-check.swamid.se/Shibboleth.sso/SLO/POST"/>
-            <md:SingleLogoutService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Artifact" Location="https://test3.release-check.swamid.se/Shibboleth.sso/SLO/Artifact"/>
-            <md:AssertionConsumerService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" Location="https://test3.release-check.swamid.se/Shibboleth.sso/SAML2/POST" index="1"/>
-            <md:AssertionConsumerService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Artifact" Location="https://test3.release-check.swamid.se/Shibboleth.sso/SAML2/Artifact" index="3"/>
-            <md:AssertionConsumerService Binding="urn:oasis:names:tc:SAML:2.0:bindings:PAOS" Location="https://test3.release-check.swamid.se/Shibboleth.sso/SAML2/ECP" index="4"/>
+            <md:ArtifactResolutionService Binding="urn:oasis:names:tc:SAML:2.0:bindings:SOAP" Location="https://adfstoolkit.org/test3/Artifact/SOAP" index="1"/>
+            <md:SingleLogoutService Binding="urn:oasis:names:tc:SAML:2.0:bindings:SOAP" Location="https://adfstoolkit.org/test3/SLO/SOAP"/>
+            <md:SingleLogoutService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect" Location="https://adfstoolkit.org/test3/SLO/Redirect"/>
+            <md:SingleLogoutService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" Location="https://adfstoolkit.org/test3/SLO/POST"/>
+            <md:SingleLogoutService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Artifact" Location="https://adfstoolkit.org/test3/SLO/Artifact"/>
+            <md:AssertionConsumerService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" Location="https://adfstoolkit.org/test3/SAML2/POST" index="1"/>
+            <md:AssertionConsumerService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Artifact" Location="https://adfstoolkit.org/test3/SAML2/Artifact" index="3"/>
+            <md:AssertionConsumerService Binding="urn:oasis:names:tc:SAML:2.0:bindings:PAOS" Location="https://adfstoolkit.org/test3/SAML2/ECP" index="4"/>
             <md:AttributeConsumingService index="1">
                 <md:ServiceName xml:lang="en">Release-check for SWAMID</md:ServiceName>
                 <md:RequestedAttribute FriendlyName="eduPersonPrincipalName" Name="urn:oid:1.3.6.1.4.1.5923.1.1.1.6" NameFormat="urn:oasis:names:tc:SAML:2.0:attrname-format:uri" isRequired="true"/>
@@ -404,11 +404,11 @@ Do not trust anything in this file, it is only for testing purposes!
             <md:EmailAddress>mailto:operations@swamid.se</md:EmailAddress>
         </md:ContactPerson>
     </md:EntityDescriptor>
-    <md:EntityDescriptor entityID="https://test4.release-check.swamid.se/shibboleth">
+    <md:EntityDescriptor entityID="urn:adfstk:sp:test4">
         <!-- Test with SP with EC = Code of Conduct from SWAMID SP, part 2-->
         <md:Extensions>
-            <mdrpi:RegistrationInfo registrationAuthority="http://www.swamid.se/">
-                <mdrpi:RegistrationPolicy xml:lang="en">http://swamid.se/policy/mdrps</mdrpi:RegistrationPolicy>
+            <mdrpi:RegistrationInfo registrationAuthority="http://adfstoolkit.org">
+                <mdrpi:RegistrationPolicy xml:lang="en">http://adfstoolkit.org/policy</mdrpi:RegistrationPolicy>
             </mdrpi:RegistrationInfo>
             <alg:DigestMethod xmlns:alg="urn:oasis:names:tc:SAML:metadata:algsupport" Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/>
             <alg:DigestMethod xmlns:alg="urn:oasis:names:tc:SAML:metadata:algsupport" Algorithm="http://www.w3.org/2001/04/xmldsig-more#sha384"/>
@@ -434,8 +434,8 @@ Do not trust anything in this file, it is only for testing purposes!
         </md:Extensions>
         <md:SPSSODescriptor protocolSupportEnumeration="urn:oasis:names:tc:SAML:2.0:protocol">
             <md:Extensions>
-                <init:RequestInitiator xmlns:init="urn:oasis:names:tc:SAML:profiles:SSO:request-init" Binding="urn:oasis:names:tc:SAML:profiles:SSO:request-init" Location="https://test4.release-check.swamid.se/Shibboleth.sso/Login"/>
-                <idpdisc:DiscoveryResponse xmlns:idpdisc="urn:oasis:names:tc:SAML:profiles:SSO:idp-discovery-protocol" Binding="urn:oasis:names:tc:SAML:profiles:SSO:idp-discovery-protocol" Location="https://test4.release-check.swamid.se/Shibboleth.sso/Login" index="1"/>
+                <init:RequestInitiator xmlns:init="urn:oasis:names:tc:SAML:profiles:SSO:request-init" Binding="urn:oasis:names:tc:SAML:profiles:SSO:request-init" Location="https://adfstoolkit.org/test4/Login"/>
+                <idpdisc:DiscoveryResponse xmlns:idpdisc="urn:oasis:names:tc:SAML:profiles:SSO:idp-discovery-protocol" Binding="urn:oasis:names:tc:SAML:profiles:SSO:idp-discovery-protocol" Location="https://adfstoolkit.org/test4/Login" index="1"/>
                 <mdui:UIInfo xmlns:mdui="urn:oasis:names:tc:SAML:metadata:ui">
                     <mdui:DisplayName xml:lang="sv">SWAMID Entity Category Release Check - GÉANT CoCo del 2</mdui:DisplayName>
                     <mdui:DisplayName xml:lang="en">SWAMID Entity Category Release Check - GÉANT CoCo part 2</mdui:DisplayName>
@@ -477,14 +477,14 @@ Do not trust anything in this file, it is only for testing purposes!
                 <md:EncryptionMethod Algorithm="http://www.w3.org/2009/xmlenc11#rsa-oaep"/>
                 <md:EncryptionMethod Algorithm="http://www.w3.org/2001/04/xmlenc#rsa-oaep-mgf1p"/>
             </md:KeyDescriptor>
-            <md:ArtifactResolutionService Binding="urn:oasis:names:tc:SAML:2.0:bindings:SOAP" Location="https://test4.release-check.swamid.se/Shibboleth.sso/Artifact/SOAP" index="1"/>
-            <md:SingleLogoutService Binding="urn:oasis:names:tc:SAML:2.0:bindings:SOAP" Location="https://test4.release-check.swamid.se/Shibboleth.sso/SLO/SOAP"/>
-            <md:SingleLogoutService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect" Location="https://test4.release-check.swamid.se/Shibboleth.sso/SLO/Redirect"/>
-            <md:SingleLogoutService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" Location="https://test4.release-check.swamid.se/Shibboleth.sso/SLO/POST"/>
-            <md:SingleLogoutService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Artifact" Location="https://test4.release-check.swamid.se/Shibboleth.sso/SLO/Artifact"/>
-            <md:AssertionConsumerService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" Location="https://test4.release-check.swamid.se/Shibboleth.sso/SAML2/POST" index="1"/>
-            <md:AssertionConsumerService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Artifact" Location="https://test4.release-check.swamid.se/Shibboleth.sso/SAML2/Artifact" index="3"/>
-            <md:AssertionConsumerService Binding="urn:oasis:names:tc:SAML:2.0:bindings:PAOS" Location="https://test4.release-check.swamid.se/Shibboleth.sso/SAML2/ECP" index="4"/>
+            <md:ArtifactResolutionService Binding="urn:oasis:names:tc:SAML:2.0:bindings:SOAP" Location="https://adfstoolkit.org/test4/Artifact/SOAP" index="1"/>
+            <md:SingleLogoutService Binding="urn:oasis:names:tc:SAML:2.0:bindings:SOAP" Location="https://adfstoolkit.org/test4/SLO/SOAP"/>
+            <md:SingleLogoutService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect" Location="https://adfstoolkit.org/test4/SLO/Redirect"/>
+            <md:SingleLogoutService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" Location="https://adfstoolkit.org/test4/SLO/POST"/>
+            <md:SingleLogoutService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Artifact" Location="https://adfstoolkit.org/test4/SLO/Artifact"/>
+            <md:AssertionConsumerService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" Location="https://adfstoolkit.org/test4/SAML2/POST" index="1"/>
+            <md:AssertionConsumerService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Artifact" Location="https://adfstoolkit.org/test4/SAML2/Artifact" index="3"/>
+            <md:AssertionConsumerService Binding="urn:oasis:names:tc:SAML:2.0:bindings:PAOS" Location="https://adfstoolkit.org/test4/SAML2/ECP" index="4"/>
             <md:AttributeConsumingService index="1">
                 <md:ServiceName xml:lang="en">Release-check for SWAMID</md:ServiceName>
                 <md:RequestedAttribute FriendlyName="eduPersonPrincipalName" Name="urn:oid:1.3.6.1.4.1.5923.1.1.1.6" NameFormat="urn:oasis:names:tc:SAML:2.0:attrname-format:uri" isRequired="true"/>
@@ -514,11 +514,11 @@ Do not trust anything in this file, it is only for testing purposes!
             <md:EmailAddress>mailto:operations@swamid.se</md:EmailAddress>
         </md:ContactPerson>
     </md:EntityDescriptor>
-    <md:EntityDescriptor entityID="https://test5.release-check.swamid.se/shibboleth">
+    <md:EntityDescriptor entityID="urn:adfstk:sp:test5">
         <!-- Test with SP with EC = Code of Conduct from non SWAMID SP-->
         <md:Extensions>
             <mdrpi:RegistrationInfo registrationAuthority="http://www.swamid.se/loop">
-                <mdrpi:RegistrationPolicy xml:lang="en">http://swamid.se/policy/mdrps</mdrpi:RegistrationPolicy>
+                <mdrpi:RegistrationPolicy xml:lang="en">http://adfstoolkit.org/policy</mdrpi:RegistrationPolicy>
             </mdrpi:RegistrationInfo>
             <alg:DigestMethod xmlns:alg="urn:oasis:names:tc:SAML:metadata:algsupport" Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/>
             <alg:DigestMethod xmlns:alg="urn:oasis:names:tc:SAML:metadata:algsupport" Algorithm="http://www.w3.org/2001/04/xmldsig-more#sha384"/>
@@ -544,14 +544,14 @@ Do not trust anything in this file, it is only for testing purposes!
         </md:Extensions>
         <md:SPSSODescriptor protocolSupportEnumeration="urn:oasis:names:tc:SAML:2.0:protocol">
             <md:Extensions>
-                <init:RequestInitiator xmlns:init="urn:oasis:names:tc:SAML:profiles:SSO:request-init" Binding="urn:oasis:names:tc:SAML:profiles:SSO:request-init" Location="https://test5.release-check.swamid.se/Shibboleth.sso/Login"/>
-                <idpdisc:DiscoveryResponse xmlns:idpdisc="urn:oasis:names:tc:SAML:profiles:SSO:idp-discovery-protocol" Binding="urn:oasis:names:tc:SAML:profiles:SSO:idp-discovery-protocol" Location="https://test5.release-check.swamid.se/Shibboleth.sso/Login" index="1"/>
-                <init:RequestInitiator xmlns:init="urn:oasis:names:tc:SAML:profiles:SSO:request-init" Binding="urn:oasis:names:tc:SAML:profiles:SSO:request-init" Location="https://test5.release-check.swamid.se/Shibboleth.sso/DS/nordu.net"/>
-                <idpdisc:DiscoveryResponse xmlns:idpdisc="urn:oasis:names:tc:SAML:profiles:SSO:idp-discovery-protocol" Binding="urn:oasis:names:tc:SAML:profiles:SSO:idp-discovery-protocol" Location="https://test5.release-check.swamid.se/Shibboleth.sso/DS/nordu.net" index="2"/>
-                <init:RequestInitiator xmlns:init="urn:oasis:names:tc:SAML:profiles:SSO:request-init" Binding="urn:oasis:names:tc:SAML:profiles:SSO:request-init" Location="https://test5.release-check.swamid.se/Shibboleth.sso/DS/swamid-test"/>
-                <idpdisc:DiscoveryResponse xmlns:idpdisc="urn:oasis:names:tc:SAML:profiles:SSO:idp-discovery-protocol" Binding="urn:oasis:names:tc:SAML:profiles:SSO:idp-discovery-protocol" Location="https://test5.release-check.swamid.se/Shibboleth.sso/DS/swamid-test" index="3"/>
-                <init:RequestInitiator xmlns:init="urn:oasis:names:tc:SAML:profiles:SSO:request-init" Binding="urn:oasis:names:tc:SAML:profiles:SSO:request-init" Location="https://test5.release-check.swamid.se/Shibboleth.sso/DS/seamless-access"/>
-                <idpdisc:DiscoveryResponse xmlns:idpdisc="urn:oasis:names:tc:SAML:profiles:SSO:idp-discovery-protocol" Binding="urn:oasis:names:tc:SAML:profiles:SSO:idp-discovery-protocol" Location="https://test5.release-check.swamid.se/Shibboleth.sso/DS/seamless-access" index="4"/>
+                <init:RequestInitiator xmlns:init="urn:oasis:names:tc:SAML:profiles:SSO:request-init" Binding="urn:oasis:names:tc:SAML:profiles:SSO:request-init" Location="https://adfstoolkit.org/test5/Login"/>
+                <idpdisc:DiscoveryResponse xmlns:idpdisc="urn:oasis:names:tc:SAML:profiles:SSO:idp-discovery-protocol" Binding="urn:oasis:names:tc:SAML:profiles:SSO:idp-discovery-protocol" Location="https://adfstoolkit.org/test5/Login" index="1"/>
+                <init:RequestInitiator xmlns:init="urn:oasis:names:tc:SAML:profiles:SSO:request-init" Binding="urn:oasis:names:tc:SAML:profiles:SSO:request-init" Location="https://adfstoolkit.org/test5/DS/nordu.net"/>
+                <idpdisc:DiscoveryResponse xmlns:idpdisc="urn:oasis:names:tc:SAML:profiles:SSO:idp-discovery-protocol" Binding="urn:oasis:names:tc:SAML:profiles:SSO:idp-discovery-protocol" Location="https://adfstoolkit.org/test5/DS/nordu.net" index="2"/>
+                <init:RequestInitiator xmlns:init="urn:oasis:names:tc:SAML:profiles:SSO:request-init" Binding="urn:oasis:names:tc:SAML:profiles:SSO:request-init" Location="https://adfstoolkit.org/test5/DS/swamid-test"/>
+                <idpdisc:DiscoveryResponse xmlns:idpdisc="urn:oasis:names:tc:SAML:profiles:SSO:idp-discovery-protocol" Binding="urn:oasis:names:tc:SAML:profiles:SSO:idp-discovery-protocol" Location="https://adfstoolkit.org/test5/DS/swamid-test" index="3"/>
+                <init:RequestInitiator xmlns:init="urn:oasis:names:tc:SAML:profiles:SSO:request-init" Binding="urn:oasis:names:tc:SAML:profiles:SSO:request-init" Location="https://adfstoolkit.org/test5/DS/seamless-access"/>
+                <idpdisc:DiscoveryResponse xmlns:idpdisc="urn:oasis:names:tc:SAML:profiles:SSO:idp-discovery-protocol" Binding="urn:oasis:names:tc:SAML:profiles:SSO:idp-discovery-protocol" Location="https://adfstoolkit.org/test5/DS/seamless-access" index="4"/>
                 <mdui:UIInfo xmlns:mdui="urn:oasis:names:tc:SAML:metadata:ui">
                     <mdui:DisplayName xml:lang="sv">SWAMID Entity Category Release Check - GÉANT CoCo del 3</mdui:DisplayName>
                     <mdui:DisplayName xml:lang="en">SWAMID Entity Category Release Check - GÉANT CoCo part 3</mdui:DisplayName>
@@ -594,14 +594,14 @@ Do not trust anything in this file, it is only for testing purposes!
                 <md:EncryptionMethod Algorithm="http://www.w3.org/2009/xmlenc11#rsa-oaep"/>
                 <md:EncryptionMethod Algorithm="http://www.w3.org/2001/04/xmlenc#rsa-oaep-mgf1p"/>
             </md:KeyDescriptor>
-            <md:ArtifactResolutionService Binding="urn:oasis:names:tc:SAML:2.0:bindings:SOAP" Location="https://test5.release-check.swamid.se/Shibboleth.sso/Artifact/SOAP" index="1"/>
-            <md:SingleLogoutService Binding="urn:oasis:names:tc:SAML:2.0:bindings:SOAP" Location="https://test5.release-check.swamid.se/Shibboleth.sso/SLO/SOAP"/>
-            <md:SingleLogoutService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect" Location="https://test5.release-check.swamid.se/Shibboleth.sso/SLO/Redirect"/>
-            <md:SingleLogoutService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" Location="https://test5.release-check.swamid.se/Shibboleth.sso/SLO/POST"/>
-            <md:SingleLogoutService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Artifact" Location="https://test5.release-check.swamid.se/Shibboleth.sso/SLO/Artifact"/>
-            <md:AssertionConsumerService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" Location="https://test5.release-check.swamid.se/Shibboleth.sso/SAML2/POST" index="1"/>
-            <md:AssertionConsumerService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Artifact" Location="https://test5.release-check.swamid.se/Shibboleth.sso/SAML2/Artifact" index="3"/>
-            <md:AssertionConsumerService Binding="urn:oasis:names:tc:SAML:2.0:bindings:PAOS" Location="https://test5.release-check.swamid.se/Shibboleth.sso/SAML2/ECP" index="4"/>
+            <md:ArtifactResolutionService Binding="urn:oasis:names:tc:SAML:2.0:bindings:SOAP" Location="https://adfstoolkit.org/test5/Artifact/SOAP" index="1"/>
+            <md:SingleLogoutService Binding="urn:oasis:names:tc:SAML:2.0:bindings:SOAP" Location="https://adfstoolkit.org/test5/SLO/SOAP"/>
+            <md:SingleLogoutService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect" Location="https://adfstoolkit.org/test5/SLO/Redirect"/>
+            <md:SingleLogoutService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" Location="https://adfstoolkit.org/test5/SLO/POST"/>
+            <md:SingleLogoutService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Artifact" Location="https://adfstoolkit.org/test5/SLO/Artifact"/>
+            <md:AssertionConsumerService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" Location="https://adfstoolkit.org/test5/SAML2/POST" index="1"/>
+            <md:AssertionConsumerService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Artifact" Location="https://adfstoolkit.org/test5/SAML2/Artifact" index="3"/>
+            <md:AssertionConsumerService Binding="urn:oasis:names:tc:SAML:2.0:bindings:PAOS" Location="https://adfstoolkit.org/test5/SAML2/ECP" index="4"/>
             <md:AttributeConsumingService index="1">
                 <md:ServiceName xml:lang="en">Release-check for SWAMID</md:ServiceName>
                 <md:ServiceName xml:lang="sv">Release-check for SWAMID</md:ServiceName>
