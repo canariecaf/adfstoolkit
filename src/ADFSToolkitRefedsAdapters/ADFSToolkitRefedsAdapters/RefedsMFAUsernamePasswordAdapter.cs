@@ -2,9 +2,14 @@
 // Licensed under the MIT License.
 
 using System;
+using System.Collections.Specialized;
 using System.Diagnostics;
 using System.IO;
+using System.IO.Compression;
+using System.Linq;
 using System.Net;
+using System.Web;
+using System.Xml;
 using Microsoft.IdentityServer.Web.Authentication.External;
 using Claim = System.Security.Claims.Claim;
 
@@ -28,6 +33,22 @@ namespace ADFSTk
 
         public IAdapterPresentation BeginAuthentication(Claim identityClaim, HttpListenerRequest request, IAuthenticationContext authContext)
         {
+            EventLog.WriteEntry("Freja eID", "Enter begin Authentication in FrejaAdapter", EventLogEntryType.Information, 335);
+            
+            foreach (var ss in authContext.Data.Keys)
+            {
+                EventLog.WriteEntry("Freja eID", "authcontext (" + ss + "): " + authContext.Data[ss], EventLogEntryType.Information, 335);
+            }
+            //request.Headers
+
+            StreamReader reader = new StreamReader(request.InputStream);
+            string text = reader.ReadToEnd();
+            EventLog.WriteEntry("Freja eID", "InputStream: " + text, EventLogEntryType.Information, 335);
+            foreach (var h in request.Headers.Keys)
+            {
+                EventLog.WriteEntry("Freja eID", "Header (" + h.ToString() + "): " + request.Headers[h.ToString()], EventLogEntryType.Information, 335);
+            }
+
             if (null == identityClaim) throw new ArgumentNullException(nameof(identityClaim));
 
             if (null == authContext) throw new ArgumentNullException(nameof(authContext));
@@ -98,9 +119,12 @@ namespace ADFSTk
             {
                 if (PasswordValidator.Validate(username, password))
                 {
+                    //Get AuthNContextClassRef
+                    var ctxClassToReturn = GetAuthNContextClass(request.Headers);
+                    EventLog.WriteEntry("Freja eID", "authcontextclassref from authadapter: " + ctxClassToReturn , EventLogEntryType.Information, 335);
                     outgoingClaims = new Claim[]
                     {
-                        new Claim(Constants.AuthenticationMethodClaimType, Constants.RefedsMFAUsernamePassword)
+                        new Claim(Constants.AuthenticationMethodClaimType, ctxClassToReturn)
                     };
 
                     // null == authentication succeeded.
@@ -116,6 +140,43 @@ namespace ADFSTk
             {
                 throw new UsernamePasswordValidationException(string.Format("UsernamePasswordSecondFactor password validation failed due to exception {0} failed to validate password {0}", ex), ex, authContext);
             }
+        }
+        #endregion
+
+        #region helpers
+        private string GetAuthNContextClass(NameValueCollection headers)
+        {
+            string ctxClass = Constants.PasswordProtected;
+            if (headers.AllKeys.Contains("Referer"))
+            {
+                var referer = headers.Get("Referer");
+                var urlDecoded = new Uri(referer);
+                var samlRequest = HttpUtility.ParseQueryString(urlDecoded.Query).Get("SAMLRequest");
+                using (var memStream = new MemoryStream(Convert.FromBase64String(samlRequest)))
+                {
+                    using (var deflateStream = new DeflateStream(memStream, CompressionMode.Decompress))
+                    {
+                        string inflated = new StreamReader(deflateStream, System.Text.Encoding.UTF8).ReadToEnd();
+                        XmlDocument xmlDoc = new XmlDocument();
+                        xmlDoc.LoadXml(@inflated);
+                        XmlNodeList nl = xmlDoc.DocumentElement.GetElementsByTagName("samlp:RequestedAuthnContext");
+                        if (nl.Count > 0)
+                        {
+                            if (!string.IsNullOrEmpty(nl.Item(0).InnerText))
+                            {
+                                if (Constants.authNContextClasses.Contains(nl.Item(0).InnerText))
+                                {
+                                    ctxClass = Constants.authNContextClasses.Where(c => c.Equals(nl.Item(0).InnerText)).First();
+                                }
+                            }
+                        }
+                        xmlDoc = null;
+                    }
+                }
+            }
+
+            return ctxClass;
+
         }
         #endregion
     }

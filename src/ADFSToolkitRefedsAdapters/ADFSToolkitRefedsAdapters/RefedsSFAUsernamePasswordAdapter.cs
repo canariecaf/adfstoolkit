@@ -100,7 +100,7 @@ namespace ADFSTk
                 {
                     outgoingClaims = new Claim[]
                     {
-                        new Claim(Constants.AuthenticationMethodClaimType, Constants.RefedsSFAUsernamePassword)
+                        new Claim(Constants.AuthenticationMethodClaimType, Constants.RefedsSFA)
                     };
 
                     // null == authentication succeeded.

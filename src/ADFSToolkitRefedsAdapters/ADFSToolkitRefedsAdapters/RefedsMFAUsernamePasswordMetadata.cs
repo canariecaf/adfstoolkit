@@ -41,7 +41,8 @@ namespace ADFSTk
 
         public virtual string[] AuthenticationMethods
         {
-            get { return new[] { Constants.RefedsMFAUsernamePassword }; }
+
+            get { return Constants.handledAuthNContextClasses; }
         }
 
         public Dictionary<int, string> Descriptions

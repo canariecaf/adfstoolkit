@@ -53,13 +53,13 @@ namespace ADFSTk
                 string[] queryParams = GetQueryParams(query);
                 Log.WriteEntry("GotQuery" + query, EventLogEntryType.Information, 335);
                 string rp = parameters[0];
-                string upn = GetUserId(parameters[1]);
+                string upn = parameters[1];
                 string shacHome = parameters[2];
                 
                 ClaimDto c = null;
                 foreach (var param in queryParams)
                 {
-                    switch (param.ToLower())
+                    switch (param.ToLower().Trim())
                     {
                         case "base32":
                             outputValues.Add(c = new ClaimDto()

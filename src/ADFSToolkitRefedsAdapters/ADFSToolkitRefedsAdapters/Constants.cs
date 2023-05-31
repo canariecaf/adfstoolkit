@@ -1,13 +1,45 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+using System.Collections.Generic;
+
 namespace ADFSTk
 {
     internal static class Constants
     {
-        public const string RefedsMFAUsernamePassword = "https://refeds.org/profile/mfa";
-        public const string RefedsSFAUsernamePassword = "https://refeds.org/profile/sfa";
-        //public const string UsernamePasswordMfa = "http://schemas.microsoft.com/ws/2012/12/authmethod/usernamepasswordMFA";
+
+        public const string RefedsMFA = "https://refeds.org/profile/mfa";
+        public const string RefedsSFA = "https://refeds.org/profile/sfa";
+        public const string Password1 = "urn:oasis:names:tc:SAML:1.0:am:password";
+        public const string Password2 = "urn:oasis:names:tc:SAML:2.0:ac:classes:Password";
+        public const string PasswordProtected = "urn:oasis:names:tc:SAML:2.0:ac:classes:PasswordProtectedTransport";
+        public const string Password3 = "http://schemas.microsoft.com/ws/2008/06/identity/authenticationmethod/password";
+        public const string ADFSTkPasswordProtected = "urn:adfstk:PasswordProtectedTransport";
+        /*
+          <d5p1:string>urn:oasis:names:tc:SAML:1.0:am:password</d5p1:string>
+					<d5p1:string>urn:oasis:names:tc:SAML:2.0:ac:classes:Password</d5p1:string>
+					<d5p1:string>urn:oasis:names:tc:SAML:2.0:ac:classes:PasswordProtectedTransport</d5p1:string>
+					<d5p1:string>http://schemas.microsoft.com/ws/2008/06/identity/authenticationmethod/password</d5p1:string>
+        */
+        public static string[] handledAuthNContextClasses =
+        {
+            RefedsMFA,
+            RefedsSFA,
+            ADFSTkPasswordProtected,
+            PasswordProtected
+        };
+
+        public static string[] authNContextClasses =
+        {
+            RefedsMFA,
+            RefedsSFA,
+            Password1,
+            Password2,
+            Password3,
+            PasswordProtected,
+            ADFSTkPasswordProtected
+        };
+
 
         public const string AuthenticationMethodClaimType = "http://schemas.microsoft.com/ws/2008/06/identity/claims/authenticationmethod";
         public const string WindowsAccountNameClaimType = "http://schemas.microsoft.com/ws/2008/06/identity/claims/windowsaccountname";
