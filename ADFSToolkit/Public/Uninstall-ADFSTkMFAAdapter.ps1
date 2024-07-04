@@ -21,7 +21,7 @@ function Uninstall-ADFSTkMFAAdapter {
     
     $authPolicy = Get-AdfsGlobalAuthenticationPolicy
 
-    if ($PSCmdlet.ParameterSetName -eq 'RefedsMFA') {
+    if ($PSCmdlet.ParameterSetName -eq 'RefedsMFA' -and $RefedsMFA -ne $false) {
 
         if ($authProviders.Name.Contains($nameMFA) -eq $false) {
             $restart = $false
@@ -37,7 +37,7 @@ function Uninstall-ADFSTkMFAAdapter {
             Unregister-AdfsAuthenticationProvider -Name $nameMFA -Confirm:$false
 
             # Remove the display names of the authentication provider for all languages
-            Remove-AdfsAuthenticationProviderWebContent -Name $nameMFA
+            # Remove-AdfsAuthenticationProviderWebContent -Name $nameMFA
 
             ### Remove all SP Hash Files to re-load all SP's!
             Remove-ADFSTkCache -SPHashFileForALLConfigurations -Force
@@ -45,7 +45,7 @@ function Uninstall-ADFSTkMFAAdapter {
             $Global:ADFSTKRefedsMFAUsernamePasswordAdapterInstalled = $false
         }
     }
-    elseif ($PSCmdlet.ParameterSetName -eq 'RefedsSFA') {
+    elseif ($PSCmdlet.ParameterSetName -eq 'RefedsSFA' -and $RefedsSFA -ne $false) {
         if ($authProviders.Name.Contains($nameSFA) -eq $false) {
             $restart = $false
             Write-ADFSTkLog (Get-ADFSTkLanguageText mfaAdapterNotPresentAborting -f 'RefedsSFA') -EntryType Warning
@@ -72,20 +72,24 @@ function Uninstall-ADFSTkMFAAdapter {
     if ($authProviders.Name.Contains($nameMFA) -eq $false `
             -and $authProviders.Name.contains($nameSFA) -eq $false) {
         Write-ADFSTkVerboseLog (Get-ADFSTkLanguageText mfaExecutingGacUnInstall)
-            
-        Write-ADFSTkVerboseLog (Get-ADFSTkLanguageText mfaGettingPathForDll)
-        
-        $binPath = Join-Path $global:ADFSTkPaths.modulePath Bin
-        $dllFile = Join-Path $binPath 'ADFSToolkitAdapters.dll'
-        Write-ADFSTkVerboseLog (Get-ADFSTkLanguageText mfaDllFound -f $dllFile)
 
         Write-ADFSTkVerboseLog "Loading System.EnterpriseSerevices Assebbly..."
         [System.Reflection.Assembly]::Load("System.EnterpriseServices, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a") | Out-Null
-        Write-ADFSTkVerboseLog (Get-ADFSTkLanguageText cDone)
-        
-        Write-ADFSTkVerboseLog (Get-ADFSTkLanguageText mfaExecutingGacRemove)
         $publish = New-Object System.EnterpriseServices.Internal.Publish
-        $publish.GacRemove($dllFile)
         Write-ADFSTkVerboseLog (Get-ADFSTkLanguageText cDone)
+        Write-ADFSTkVerboseLog (Get-ADFSTkLanguageText mfaGettingPathForDll)
+        
+        $GACMainPath = 'C:\Windows\Microsoft.NET\assembly\GAC_MSIL\ADFSToolkitAdapters'
+        $GACPath = Get-ChildItem -Path $GACMainPath -Recurse -Filter 'ADFSToolkitAdapters.dll' -ErrorAction SilentlyContinue
+
+        if ($GACPath.Count -gt 0) {
+            Write-ADFSTkVerboseLog (Get-ADFSTkLanguageText mfaDllFound -f $dllFile)
+        }
+        
+        foreach ($InstalledDll in $GACPath) {
+            Write-ADFSTkVerboseLog (Get-ADFSTkLanguageText mfaExecutingGacRemove)
+            $publish.GacRemove($InstalledDll.FullName)
+            Write-ADFSTkVerboseLog (Get-ADFSTkLanguageText cDone)
+        }
     }
 }

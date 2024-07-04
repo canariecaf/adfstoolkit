@@ -1,6 +1,6 @@
 ﻿@{
     tableLanguage = "en-US"
-    tableVersion = "2.1"
+    tableVersion = "2.2"
     tableCreatedBy = "SWAMID"
     tableContactAddress = "operations@swamid.se"
 
@@ -85,6 +85,19 @@ Get-ADFSTkFederationDefaults -URL [the URL provided from your Federation Operato
     mainconfNoConfigFileFound = "No ADFSTk configuration file found!"
     mainconfCouldNotParseConfigFile =  "Could not open or parse the ADFSTk configuration file!`r`n{0}"
 
+    ###############################################
+    ### State configuration cmdlets [stateconf] ###
+    ###############################################
+
+    stateconfCouldNotParseConfigFile = "Could not open or parse the State configuration file!`r`n{0}"
+    stateconfConfigFileExists = "A State configuration file already exists!"
+    stateconfDoCreateConfigFile = "Do you want to create a new State configuration file?`n(the current one will be backed up)"
+    stateconfOldConfigBackedUp = "Current State configuration file backed up to: '{0}'"
+    stateconfAbortDueToExistingConfFile = "Aborting due to already existing State configuration file."
+    stateconfNewConfFileCreated = "New State configuration file created: '{0}'"
+    stateconfNewConfFileMissing = "The State configuration file is missing! It will be created automatically now."
+    stateconfNoConfigFileFound = "No State configuration file found!"
+
     ################################################
     ### Institution configuration cmdlets [conf] ###
     ################################################
@@ -134,19 +147,19 @@ Sync-ADFSTkAggregates
 Do you want to create a scheduled task that executes this command every hour?
 The scheduled task will be disabled when created and you can change triggers as you like.
 "@
-    confCreateScheduledTask = "Create ADFSToolkit scheduled task?"  
-    confCheckIfScheduledTaskIsPresent = "Checking if the cheduled task already is present..."
-    confRemoveScheduledTask = "Scheduled task found and will be removed due to -Force parameter."
+    confCreateScheduledTask = "Create ADFSToolkit Import Metadata scheduled task?"  
+    confCheckIfScheduledTaskIsPresent = "Checking if the Import Metadata scheduled task already is present..."
+    confRemoveScheduledTask = "The Import Metadata scheduled task was found and will be removed due to -Force parameter."
     confScheduledTaskInfo = @"
 
-The created Scheduled Task is disabled, but when enabled it will run every hour to update the ADFS with new/changed SP's.
+The created Import Metadata Scheduled Task is disabled, but when enabled it will run every hour to update the ADFS with new/changed SP's.
 Before enabling it, change the task to run whether user is logged on or not and change the user to a service account with the right privileges.
 
 After enabeling the Scheduled Task, the Institution Config also needs to be enabled.
 Use Enable-ADFSTkInstitutionConfiguration to do that.
 "@
     confImportMetadata = "Import Federated Metadata with ADFSToolkit"
-    confTHisSchedTaskWillDoTheImport = "This scheduled task imports the Federated Metadata with ADFSToolkit"
+    confThisSchedTaskWillDoTheImport = "This scheduled task imports the Federated Metadata with ADFSToolkit"
     confFederationDefaultConfigNotFoundQuestion = "Default config file for {0} could not be found! Do you want to use the ADFSToolkit default one?"
     confFederationDefaultConfigNotFound = "Default federation config file for {0} could not be found. Aborting!"
     confCouldNotOpenFederationDefaultConfig = "Could not open default configuration file '{0}'. Error: {1}"
@@ -178,7 +191,8 @@ When the upgrade is done and you have tested everything, run Enable-ADFSTkInstit
     confUpdatedInstConfigDone = "{0} updated successfully from v{1} to {2}!"
     confUpdatedInstConfigAllDone = "All Institution config file(s) done..."
     confProcessingInstConfig = "Processing Institution config file: '{0}'"
-    confInstConfAlreadyCorrectVersion = "Current Institution config file already at v{0}!"
+    confInstConfAlreadyCorrectVersion = "{0} already at v{1}!"
+    confInstConfNeedsUpgrade = "{0} needs to be updated from v{1} to {2}!"
     confLocalManualSettingsMessage = @"
 ADFS Toolkit uses Entity Categories from the metadata to send correct attributes to the Service Providers.
 
@@ -238,6 +252,54 @@ Please open the file and configure how ADFSToolkit can get them (Active Director
     confSelectInstitutionConfigToEnable = "Select the configuration file(s) you want to enable."
     confSelectInstitutionConfigToDisable = "Select the configuration file(s) you want to disable."
     confNoInstitutionConfigFileSelected = "No configurationfile(s) were selected. Nothing changed!"
+
+    confProcessLoginEvents = "Process Login Events (f-ticks)"
+    confThisSchedTaskGetsLoginEventsAndSendAsFticks = "This Scheduled Task reads login events from the Event Log and sends it to a f-ticks server"
+    confFticksScheduledTaskInfo = @"
+The created F-Ticks Scheduled Task is currently disabled. Start Task Scheduler and enable it to start sending f-ticks. When enabled, it will run every 10 minutes.
+It's recommended to change the running user to a service account with privileges to read the Event Log.
+"@
+
+    confUpdatingADFSTkConfigFromTo = "Updating ADFS Toolkit config from {0} to {1}"
+    confRegisterFticks = @"
+This version supports F-Ticks. Do you want to configure that now?
+
+If you skip this step now you can configure it manually later by running:
+Set-ADFSTkFticksServer -Server [mysyslogserver.institution.edu]
+Register-ADFSTkFTicksScheduledTask
+"@
+    confFticksRegisterOnAllServers = @"
+You need to activate F-Ticks on all ADFS Servers in the farm!
+Run:
+Set-ADFSTkFticksServer -Server {0} 
+and
+Register-ADFSTkFTicksScheduledTask
+on the other ADFS servers to.
+"@
+    confIsAuditPolicyEnabled = "Checking if Audit Policy is enabled"
+    confAuditPolicyNeeded = @"
+    For the f-ticks to work properly, we need to alter the Audit Policy 'Application Generated' and enable
+    it for success and failure. You can see the Audit Policy if you start  the Local Security Policy and go to:
+    Advanced Audit Policy Configuration -> System Audit Policies -> Object Access
+    or with the command:
+    auditpol /get /category:'Object Access' /r | ConvertFrom-Csv | ? Subcategory -eq 'Application Generated'
+"@
+    confEnableAuditPolicyNow = "Do you want to enable the Audit Policy now?"
+    confAuditPolicyHasBeenEnabled = "Audit Policy 'Application Generated' has been enabled"
+    confAuditPolicyAborted = "Audit Policy 'Application Generated' has not been enabled. Please enable it and try again!"
+    confAuditPolicyIsEnabled = "Audit Policy 'Application Generated' is enabled"
+    confRunHealthCheckRecommended = "It's recommended to run Get-ADFSTkHealth -HealthCheckMode Full to find any errors."
+    confDoRunHealthCheck = "Do you want to run a full health check now?"
+    confNoUpdatesNeeded = "No updates to ADFSTk Configuration or AFSTk Institution Configuration needed or the configuration file(s) aready has the correct version."
+    confUpdateError = "At least one update failed. Please look above and correct the error(s) before continuing!"
+    confProcessingADFSTkConfigs = "Processing ADFS Toolkit configuration file..."
+    confProcessingInstitutionConfigs = "Processing Institution configuration files..."
+    confContinueWithoutFederationConfig = "Updating Institution Config without Default Federation Config..."
+    confAbortDueToIncorrectFederationConfigVersion = "Aborting due to missing or incorrect Default Default Federation Config version."
+    confDownloadDefaultFederationConfig = "Your Federation default configuration file is not compatible with the current version of ADFS Toolkit. Do you want to download the default configuration file from the URL: {0}?"
+    confDownloadedDefaultFederationConfigIncompatible = "The downloaded Federation default configuration file is not compatible with the current version of ADFS Toolkit. Do you want to proceed without a Federation default file?"
+    confContinueWithoutDefaultFederationConfig = "Do you want to continue without a Federation Default file?"
+    confIncompatobleDefaultFederationConfig = "Your Federation default configuration file is not compatible with the current version of ADFS Toolkit. Do you want to download a default configuration file from GitHub?"
 
     #######################################
     ### Federation cmdlets [federation] ###
@@ -329,6 +391,7 @@ Please open the file and configure how ADFSToolkit can get them (Active Director
     addRPSuccefullyAddedRP = "Successfully added '{0}'!"
     addRPCouldNotAddRP = "Could not add '{0}' as SP! Error: {1}"
     addRPRPAlreadyExists = "'{0}' already exists as SP!"
+    addCustomAccessControlPolicyNameMissing = "The Access Control Policy '{0}' is missing. Please add it to the ADFS Configuration and try again!"
 
     ##############################################
     ### Process Relying Party Trust [processRP] ###
@@ -450,9 +513,17 @@ Please open the file and configure how ADFSToolkit can get them (Active Director
     #############################
     
     healthFixed = "(Fixed)"
+    healthIncompatibleADFSTkConfigVersion = @"
+    The ADFS Toolkit Configuration File is incompatible with this version of ADFS Toolkit!
+    The ADFS Toolkit Configuration File version is {0} and the version needs to be {1}.
+    
+    Run Update-ADFSTk to update your configuration to the correct version.
+"@
     healthIncompatibleInstitutionConfigVersion = @"
 The provided Institution Configuration File is incompatible with this version of ADFS Toolkit!
-The Institution Configuration File version is {0} and the minimum version needs to be {1}.
+The Institution Configuration File version is {0} and the version needs to be {1}.
+
+Run Update-ADFSTk to update your configuration to the correct version.
 "@
     healthCheckMissingSignaturesName = "Check missing signatures"
     healthCheckIncorectSignaturesName = "Check incorrect signatures"
@@ -475,35 +546,42 @@ If you don't know why this occurred, reinstallation of ADFS Toolkit is recommend
 "@
     healthCheckSignaturePass = "Signaturecheck PASSED!"
     healthCheckSignatureFail = "Signaturecheck FAILED!"
-    healthCheckConfigVersionStartMessage = "Checking for compatible institution configuration file version..."
+    healthCheckADFSTkConfigVersionStartMessage = "Checking for compatible ADFS Toolkit configuration file version..."
+    healthCheckInstitutionConfigVersionStartMessage = "Checking for compatible institution configuration file version..."
     healhCheckConfigVersionVerifyingPath = "Verifying path for '{0}'..."
     healhCheckConfigVersionVerifyingPathSucceeded = "Path test succeeded!"
     healhCheckConfigVersionVerifyingXMLParse = "Verifying open and xml parsing..."
     healhCheckConfigVersionVerifyingXMLParseSucceeded = "Open and XML parse succeeded!"
-    healhCheckConfigVersionVerifyingXMLParseFailed = "Could not open or parse the institution configuration file '{0}'. Health check failed!"
+    healhCheckConfigVersionVerifyingXMLParseFailed = "Could not open or parse the  configuration file '{0}'. Health check failed!"
     healthCheckConfigVersionVerifyingVersionStart = "Verifying compatible version..."
     healthCheckConfigVersionVerifyingVersionCompareVersions = "Config version: {0} - Compatible version: {1}"
     healthCheckConfigVersionVerifyingVersionSucceeded = "Compatible version succeeded!"
+    healthUpdateADFSTkConfigVersion = "Do you want to run Update-ADFSTk?"
+    healthUpdateInstitutionConfigVersion = "Do you want to run Update-ADFSTk?"
     healthCheckConfigVersionPass = "Versioncheck PASSED!"
     healthCheckConfigVersionFail = "Versioncheck FAILED!"
+    healthCheckMFAAccessPolicyStartMessage = "Checking if MFA Adapter is installed and Access Control Policy is present..."
     healthMFAAccesControlPolicyInstalledACPMissing = "MFA Adapter installed but Access Control Policy is missing!"
     healthMFAAccesControlPolicyInstalledACPPresent = "MFA Adapter installed and Access Control Policy present"
     healthMFAAccesControlPolicyNotInstalled = "MFA Adapter not installed"
     healthMFAAccesControlPolicyPass = "MFA Access Control Policy test PASSED!"
     healthMFAAccesControlPolicyFail = "MFA Access Control Policy test FAILED!"
+    healthCheckRemovedSPsStillInSPHashSPHashStartMessage = "Checking if any removed SP's still are present in the SPHashFile..."
     healthCheckRemovedSPsStillInSPHashSPHashCorrupt = "The SP Hash file '{0}' is corrupt!"
     healthCheckRemovedSPsStillInSPHashMissingInMetadata = "{0} SP's found in the SP Hash file that are missing in the Federation metadata"
     healthCheckRemovedSPsStillInSPHashNoSPsMissingInMetadata = "No SP's found in the SP Hash file that are missing in the Federation metadata"
     healthCheckRemovedSPsStillInSPHashAllSPsWillBeImported = "SP Hash file '{0}' missing. All SP's will be imported from the Federation metadata"
+    healthMissingSPsInADFSStartMessage = "Checking if any SP's in the SPShashFile are missing in ADFS..."
     healthMissingSPsInADFSSPsMissingInADFS = "{0} SP's found in the SP Hash file that are missing in ADFS"
     healthMissingSPsInADFSNoSPsMissingInADFS = "No SP's found in the SP Hash file that are missing in ADFS"
-    healthScheduledTaskPresentScheduledTaskPresent = "Scheduled Task present"
-    healthScheduledTaskPresentScheduledTaskNotPresent = "Scheduled Task not present"
+    healthScheduledTaskPresentStartMessage = "Checking if {0} Scheduled Task is present"
+    healthScheduledTaskPresentScheduledTaskPresent = "{0} Scheduled Task present"
+    healthScheduledTaskPresentScheduledTaskNotPresent = "{0} Scheduled Task not present"
     healthMFAAccesControlPolicyRegisterACP = "Do you want to create the missing Access Control Policy?"
     healthRemoveSPsFromSPHashFileRemoveSPsNotInMetadata = "Do you want to remove the SP's from the SP Hash file '{0}' that doesn't exists in the Metadata?"
     healthDeleteSPHashFileDeleteCorruptSPHashFile = "Do you want to delete the corrupt SP Hash file '{0}'?"
     healthAddMissingSPsInADFSRemoveMissingSPs = "Do you want to remove SP's from the SP Hash file '{0}' that doesn't exists in ADFS?"
-    healthRegisterScheduledTaskCreateSchedTask = "Do you want to create the Scheduled Task?"
+    healthRegisterScheduledTaskCreateSchedTask = "Do you want to create the {0} Scheduled Task?"
     healthFailed = "ADFSTkHealth FAILED"
     healthPassedWithWarnings = "ADFSTkHealth PASSED with warnings"
     healthPassed =  "ADFSTkHealth PASSED" 
@@ -613,4 +691,24 @@ Run Get-ADFSTkStore to check installed version vs version included in ADFSToolki
     storeIsNotInstalled = "ADFSTkStore is NOT installed!"
     storeInstalledDllVersion = "Installed Dll version is: {0}"
     storeSourceDllVersion = "Dll version included in ADFSToolkit is: {0}"
+
+    ################################
+    ### F-Ticks cmdlets [fticks] ###
+    ################################
+
+    fticksProcessStarted = @"
+F-Ticks process started.
+{0} new event(s) found!
+"@
+    fticksProcessFinished = "F-Ticks process finished."
+    fticksErrorProcessing = @"
+Could not process event due to the following error:
+{0}
+"@
+    fticksServerAndSaltUpdated = @"
+The F-Ticks server was updated to {0}.
+A new salt was generated.
+"@
+    fticksServerNameNeeded = "Please provide the DNS name of the F-Ticks server"
+    confRegisterFticksScheduledTask = "Do you want to register a Scheduled Task to process login events and create F-Ticks every 10 minute?"
 }

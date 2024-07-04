@@ -8,6 +8,7 @@
     $paths.mainBackupDir = Join-Path $paths.MainConfigDir 'backup'
     
     $paths.cacheDir = Join-Path $paths.MainDir 'cache'
+    $paths.localDir = Join-Path $paths.MainDir 'local'
     
     $paths.institutionDir = Join-Path $paths.MainConfigDir 'institution'
     $paths.institutionBackupDir = Join-Path $paths.institutionDir 'backup'
@@ -25,6 +26,8 @@
     $paths.defaultConfigFile = Join-Path $paths.moduleConfigDefaultDir 'config.ADFSTk.default.xml'
     $paths.defaultInstitutionLocalSPFile = Join-Path $paths.moduleConfigDefaultDir 'get-ADFSTkLocalManualSPSettings-dist.ps1'
     $paths.defaultInstitutionLocalTransformRulesFile = Join-Path $paths.moduleConfigDefaultDir 'Get-ADFSTkLocalTransformRules-dist.ps1'
+
+    $paths.stateConfigFile = Join-Path $paths.localDir "state.$($env:COMPUTERNAME).xml"
 
     return $paths
 }

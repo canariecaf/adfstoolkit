@@ -1,18 +1,15 @@
-﻿function New-ADFSTkConfiguration
-{
-[CmdletBinding(SupportsShouldProcess=$true)]
-param(
-    [switch]$Passthru
-)
+﻿function New-ADFSTkConfiguration {
+    [CmdletBinding(SupportsShouldProcess = $true)]
+    param(
+        [switch]$Passthru
+    )
 
     Write-ADFSTkHost mainconfStartMessage -Style Info -AddLinesOverAndUnder
     
-    if (Test-Path $Global:ADFSTKPaths.mainConfigFile)
-    {
+    if (Test-Path $Global:ADFSTKPaths.mainConfigFile) {
         Write-ADFSTkLog -Message (Get-ADFSTkLanguageText mainconfConfigFileExists) -EntryType Warning
         
-        if (Get-ADFSTkAnswer (Get-ADFSTkLanguageText mainconfDoCreateConfigFile) -Caption (Get-ADFSTkLanguageText cFileAlreadyExists))
-        {
+        if (Get-ADFSTkAnswer (Get-ADFSTkLanguageText mainconfDoCreateConfigFile) -Caption (Get-ADFSTkLanguageText cFileAlreadyExists)) {
             $file = Get-ChildItem $Global:ADFSTKPaths.mainConfigFile
             $backupFilename = "{0}_backup_{1}{2}" -f $file.BaseName, (Get-Date).tostring("yyyyMMdd_HHmmss"), $file.Extension
 
@@ -20,8 +17,7 @@ param(
             
             Write-ADFSTkHost mainconfOldConfigBackedUp -f $backupFile.FullName -Style Value
         }
-        else
-        {
+        else {
             Write-ADFSTkLog (Get-ADFSTkLanguageText mainconfAbortDueToExistingConfFile) -MajorFault
         }
     }
@@ -50,22 +46,20 @@ param(
     Write-ADFSTkHost mainconfSearchForExistingInstConfFile -Style Info
 
     $currentConfigs = Get-ChildItem $Global:ADFSTKPaths.institutionDir -Filter '*.xml' `
-                                                                -Recurse | ? {$_.Directory.Name -notcontains 'backup'} | `
-                                                                            Select Directory, Name, LastWriteTime | `
-                                                                            Sort Directory,Name
+        -Recurse | ? { $_.Directory.Name -notcontains 'backup' } | `
+        Select Directory, Name, LastWriteTime | `
+        Sort Directory, Name
     $selectedConfigs = $null
     
-    if ($currentConfigs.count -eq 0){
+    if ($currentConfigs.count -eq 0) {
         Write-ADFSTkHost mainconfNoInstConfigsFound -Style Attention -AddLinesOverAndUnder
     }
-    else
-    {
+    else {
         Write-ADFSTkHost cFilesFound -f $currentConfigs.count -Style Value
         Write-ADFSTkHost -WriteLine
     }
 
-    if (![string]::IsNullOrEmpty($currentConfigs))
-    {
+    if (![string]::IsNullOrEmpty($currentConfigs)) {
         Write-ADFSTkHost mainconfSelectConfFilesToAddToMainConf -Style Info -AddSpaceAfter
         Read-Host (Get-ADFSTkLanguageText cPressEnterKey) | Out-Null
         
@@ -78,84 +72,38 @@ param(
 
     #endregion
 
-    #region Main config
-
-    [xml]$config = New-Object System.Xml.XmlDocument
-    $config.AppendChild($config.CreateXmlDeclaration("1.0","UTF-8",$null)) | Out-Null
-        
-    $configurationNode = $config.CreateNode("element","Configuration",$null)
-        
-    $configVersionNode = $config.CreateNode("element","ConfigVersion",$null)
-    $configVersionNode.InnerText = $Global:ADFSTkCompatibleADFSTkConfigVersion
-
-    $configurationNode.AppendChild($configVersionNode) | Out-Null
-
-    $OutputLanguageNode = $config.CreateNode("element","OutputLanguage",$null)
-    $OutputLanguageNode.InnerText = $Global:ADFSTkselectedLanguage
-
-    $configurationNode.AppendChild($OutputLanguageNode) | Out-Null
-
-    $config.AppendChild($configurationNode) | Out-Null
-    #endregion 
-
-   #region Federation config
-    $federationConfig = $config.CreateNode("element","FederationConfig",$null)
-    
-    $federationConfigFederation = $config.CreateNode("element","Federation",$null)
-
-    $federationConfigFederationName = $config.CreateNode("element","FederationName",$null)
-    
-    if ($chosenFed -ne $null)
-    {
-        $federationConfigFederationName.InnerText = $chosenFed.Id
-    }
-
-    $federationConfigFederation.AppendChild($federationConfigFederationName) | Out-Null
-
-    $federationConfigFederationSigningThumbprint = $config.CreateNode("element","SigningThumbprint",$null)
-    $federationConfigFederation.AppendChild($federationConfigFederationSigningThumbprint) | Out-Null
-
-    $federationConfigFederationURL = $config.CreateNode("element","URL",$null)
-    $federationConfigFederation.AppendChild($federationConfigFederationURL) | Out-Null
-
-    $federationConfig.AppendChild($federationConfigFederation) | Out-Null
-    
-    $config.Configuration.AppendChild($federationConfig) | Out-Null
-
-    #endregion
+    #Main config
+    $config = Get-ADFSTkConfigurationDefaults
 
     #region config files
     
-    $configFiles = $config.CreateNode("element","ConfigFiles",$null)
-
-    foreach ($selectedConfig in $selectedConfigs)
-    {
-        $node = $config.CreateNode("element","ConfigFile",$null)
-        $node.InnerText = Join-Path $selectedConfig.Directory $selectedConfig.Name
-        $node.SetAttribute("enabled","false")
-        $configFiles.AppendChild($node) | Out-Null
+    if ($chosenFed -ne $null) {
+        $config.Configuration.FederationConfig.Federation.FederationName = $chosenFed.Id
     }
 
-    $config.Configuration.AppendChild($configFiles) | Out-Null
-       
+    $configfiles = Select-Xml -Xml $config -XPath "Configuration/ConfigFiles"
+
+    foreach ($selectedConfig in $selectedConfigs) {
+        $node = $config.CreateNode("element", "ConfigFile", $null)
+        $node.InnerText = Join-Path $selectedConfig.Directory $selectedConfig.Name
+        $node.SetAttribute("enabled", "false")
+        $configFiles.Node.AppendChild($node) | Out-Null
+    }
+
     #endregion
 
     #Don't save the configuration file if -WhatIf is present
-    if($PSCmdlet.ShouldProcess($Global:ADFSTKPaths.mainConfigFile,"Create"))
-    {
-        try 
-        {
+    if ($PSCmdlet.ShouldProcess($Global:ADFSTKPaths.mainConfigFile, "Create")) {
+        try {
             $config.Save($Global:ADFSTKPaths.mainConfigFile)
             Write-ADFSTkLog (Get-ADFSTkLanguageText  mainconfNewConfFileCreated -f $Global:ADFSTKPaths.mainConfigFile) -ForegroundColor Green
         }
-        catch
-        {
+        catch {
             throw $_
         }
     }
 
-    if ($PSBoundParameters.ContainsKey('Passthru'))
-    {
-        return $config.configuration
+    if ($PSBoundParameters.ContainsKey('Passthru')) {
+        return $config.Configuration
     }
 }

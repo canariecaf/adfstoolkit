@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Configuration>
+  <ConfigVersion>1.1</ConfigVersion>
+  <ModuleVersion>2.3.0</ModuleVersion>
+  <OutputLanguage>en-US</OutputLanguage>
+  <Fticks>
+    <Server>
+    </Server>
+    <Salt>
+    </Salt>
+  </Fticks>
+  <FederationConfig>
+    <Federation>
+      <FederationName>SWAMID</FederationName>
+      <SigningThumbprint />
+      <URL>C:\Users\ADFSAdmin\Documents\WindowsPowershell\Modules\adfstoolkit\Tests\TestFiles\SWAMID_FederationDefaults_1.3.1.zip</URL>
+    </Federation>
+  </FederationConfig>
+  <ConfigFiles>
+    <ConfigFile enabled="true">C:\ADFSToolkit\config\institution\config.Swamid.xml</ConfigFile>
+  </ConfigFiles>
+</Configuration>

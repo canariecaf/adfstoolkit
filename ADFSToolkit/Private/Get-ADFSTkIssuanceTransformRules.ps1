@@ -54,8 +54,8 @@ function Get-ADFSTkIssuanceTransformRules {
 
     $adfstkConfig = Get-ADFSTkConfiguration
 
-    $federationDir = Join-Path $Global:ADFSTkPaths.federationDir $adfstkConfig.FederationConfig.Federation.FederationName
-    $fedEntityCategoryFileName = Join-Path $federationDir "$($adfstkConfig.FederationConfig.Federation.FederationName)_entityCategories.ps1"
+    $federationDir = Join-Path $Global:ADFSTkPaths.federationDir $adfstkConfig.Configuration.FederationConfig.Federation.FederationName
+    $fedEntityCategoryFileName = Join-Path $federationDir "$($adfstkConfig.Configuration.FederationConfig.Federation.FederationName)_entityCategories.ps1"
 
     if (Test-Path $fedEntityCategoryFileName) {
         try {

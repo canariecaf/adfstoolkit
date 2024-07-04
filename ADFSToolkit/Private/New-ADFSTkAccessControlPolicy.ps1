@@ -6,8 +6,8 @@ function New-ADFSTKAccessControlPolicy {
         <Rule>
           <Conditions>
             <Condition i:type="SpecificClaimCondition">
-              <ClaimType>http://schemas.microsoft.com/ws/2008/06/identity/claims/authenticationmethod</ClaimType>
-              <Operator>Equals</Operator>
+              <ClaimType>http://schemas.microsoft.com/claims/authnmethodsreferences</ClaimType>
+              <Operator>Contains</Operator>
               <Values>
                 <Value>https://refeds.org/profile/mfa</Value>
               </Values>

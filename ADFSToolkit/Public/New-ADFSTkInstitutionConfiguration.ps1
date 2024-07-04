@@ -20,7 +20,7 @@ function New-ADFSTkInstitutionConfiguration {
     # Use a default template from to start with
     #$mainConfiguration.FederationConfig.Federation
 
-    $federationName = $mainConfiguration.FederationConfig.Federation.FederationName
+    $federationName = $mainConfiguration.Configuration.FederationConfig.Federation.FederationName
     if ([string]::IsNullOrEmpty($federationName))
     {
         $defaultConfigFile = $Global:ADFSTkPaths.defaultConfigFile

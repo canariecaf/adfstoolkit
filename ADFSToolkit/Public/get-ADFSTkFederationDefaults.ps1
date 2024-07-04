@@ -2,10 +2,8 @@
     [CmdletBinding()]
     param (
         [Parameter(ParameterSetName = 'Default', Position = 0)]
-        [ValidateNotNullOrEmpty()]
-        [string]
-        $URL,
-        [Parameter(ParameterSetName = 'Default')]    
+        [string]$URL = 'https://github.com/fedtools/federation-settings/archive/refs/heads/main.zip',
+        [Parameter(ParameterSetName = 'Default')]
         [switch]$InstallDefaults,
         [Parameter(ParameterSetName = 'ClearCache')]
         [switch]$ClearCache,
@@ -24,7 +22,7 @@
         $unzippedFullNameDir = Join-path $Global:ADFSTkPaths.cacheDir "federationdefaults"
         $federationConfigCacheFile = Join-Path $Global:ADFSTkPaths.cacheDir $fedCacheFile
         $adfstkConfig = Get-ADFSTkConfiguration
-        $federationName = $adfstkConfig.FederationConfig.Federation.FederationName
+        $federationName = $adfstkConfig.Configuration.FederationConfig.Federation.FederationName
         $federationTargetDir = Join-Path $Global:ADFSTkPaths.federationDir $federationName
  
         # Begin processing the various states for default handling
@@ -123,7 +121,7 @@
             }
 
             #Write-Output ("ADFSToolkit: Done. Next time a new aggregate is configured, defaults will be used. Existing configurations should remain unchanged")
-            Write-ADFSTkHost feddefaultsUnchanged -Style Info
+            Write-ADFSTkHost feddefaultsUnchanged -Style Info #FixTest
         }
 
         Write-ADFSTkHost feddefaultsAllDone -Style Info

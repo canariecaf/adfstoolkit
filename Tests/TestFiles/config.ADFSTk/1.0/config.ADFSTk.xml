@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Configuration>
+  <ConfigVersion>1.0</ConfigVersion>
+  <OutputLanguage>en-US</OutputLanguage>
+  <FederationConfig>
+    <Federation>
+      <FederationName>SWAMID</FederationName>
+      <SigningThumbprint />
+      <URL />
+    </Federation>
+  </FederationConfig>
+  <ConfigFiles>
+    <ConfigFile enabled="true">C:\ADFSToolkit\config\institution\config.Swamid.xml</ConfigFile>
+  </ConfigFiles>
+</Configuration>

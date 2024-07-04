@@ -75,7 +75,7 @@ function Install-ADFSTkMFAAdapter {
     Write-ADFSTkVerboseLog (Get-ADFSTkLanguageText cDone)
     #endregion
     
-    if ($PSCmdlet.ParameterSetName -eq 'RefedsMFA') {
+    if ($PSCmdlet.ParameterSetName -eq 'RefedsMFA' -and $RefedsMFA -ne $false) {
         Write-ADFSTkVerboseLog (Get-ADFSTkLanguageText mfaEnteringPath -f "RefedsMFA")
 
         $nameMFA = "RefedsMFAUsernamePasswordAdapter"
@@ -117,7 +117,7 @@ function Install-ADFSTkMFAAdapter {
             }
         }
     }
-    elseif ($PSCmdlet.ParameterSetName -eq 'RefedsSFA') {
+    elseif ($PSCmdlet.ParameterSetName -eq 'RefedsSFA' -and $RefedsSFA -ne $false) {
         Write-ADFSTkVerboseLog (Get-ADFSTkLanguageText mfaEnteringPath -f "RefedsSFA")
         $nameSFA = "RefedsSFAUsernamePasswordAdapter"
 
