@@ -55,7 +55,7 @@ function Get-ADFSTkInstitutionConfigDefaults {
                 }
             }
             else {
-                Write-ADFSTkLog (Get-ADFSTkLanguageText confFederationDefaultConfigNotFound) #New text
+                Write-ADFSTkLog (Get-ADFSTkLanguageText confFederationDefaultConfigNotFound -f $defaultFederationConfigFile) #New text
                 #Ask to download?
             }
         }

@@ -161,7 +161,7 @@ Use Enable-ADFSTkInstitutionConfiguration to do that.
     confImportMetadata = "Import Federated Metadata with ADFSToolkit"
     confThisSchedTaskWillDoTheImport = "This scheduled task imports the Federated Metadata with ADFSToolkit"
     confFederationDefaultConfigNotFoundQuestion = "Default config file for {0} could not be found! Do you want to use the ADFSToolkit default one?"
-    confFederationDefaultConfigNotFound = "Default federation config file for {0} could not be found. Aborting!"
+    confFederationDefaultConfigNotFound = "Default federation config file for {0} could not be found."
     confCouldNotOpenFederationDefaultConfig = "Could not open default configuration file '{0}'. Error: {1}"
     confDefaultConfigNotFound = "Default config file for {0} could not be found. Aborting!"
     confDefaultConfigIncorrectVersion = "The default configuration file '{0}' is of version {1}. Expected version: {2}. Aborting!"
@@ -295,11 +295,14 @@ on the other ADFS servers to.
     confProcessingADFSTkConfigs = "Processing ADFS Toolkit configuration file..."
     confProcessingInstitutionConfigs = "Processing Institution configuration files..."
     confContinueWithoutFederationConfig = "Updating Institution Config without Default Federation Config..."
-    confAbortDueToIncorrectFederationConfigVersion = "Aborting due to missing or incorrect Default Default Federation Config version."
+    confAbortDueToIncorrectFederationConfigVersion = "Aborting due to missing or incorrect Federation Config version."
     confDownloadDefaultFederationConfig = "Your Federation default configuration file is not compatible with the current version of ADFS Toolkit. Do you want to download the default configuration file from the URL: {0}?"
     confDownloadedDefaultFederationConfigIncompatible = "The downloaded Federation default configuration file is not compatible with the current version of ADFS Toolkit. Do you want to proceed without a Federation default file?"
     confContinueWithoutDefaultFederationConfig = "Do you want to continue without a Federation Default file?"
     confIncompatobleDefaultFederationConfig = "Your Federation default configuration file is not compatible with the current version of ADFS Toolkit. Do you want to download a default configuration file from GitHub?"
+    confADFSTkStoreNeedsUpgrade = "ADFSTkStore will be updated from version {0} to version {1}."
+    confADFSTkMFAAdaptersNeedsUpgrade = "ADFSTkMFAAdapters will be updated from version {0} to version {1}."
+    confDownloadFederationDefaultConfig = "Do you want to download the default configuration file?"
 
     #######################################
     ### Federation cmdlets [federation] ###

@@ -2,6 +2,8 @@ function Register-ADFSTkFTicksScheduledTask {
     [cmdletbinding()]
     param ([switch]$Force)
     
+    Verify-ADFSTkEventLogUsage -LogName ADFSToolkit -Source 'Invoke-ADFSTkFticks' | Out-Null
+    
     #Check for Audit Policy
     Write-ADFSTkVerboseLog (Get-ADFSTkLanguageText confIsAuditPolicyEnabled)
     $auditPolicy = (auditpol.exe /get /category:'Object Access' /r | ConvertFrom-Csv | ? Subcategory -eq 'Application Generated')

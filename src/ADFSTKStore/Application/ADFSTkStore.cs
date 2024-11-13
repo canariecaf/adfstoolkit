@@ -79,6 +79,8 @@ namespace ADFSTk
                             });
                             break;
                         case "subjectid":
+                            upn = upn.Replace(".", "=2E");
+                            upn = upn.Replace("_", "=5F");
                             outputValues.Add(c = new ClaimDto()
                             {
                                 Name = param,

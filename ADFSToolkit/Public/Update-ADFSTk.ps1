@@ -100,7 +100,7 @@
                         Write-ADFSTkLog (Get-ADFSTkLanguageText confContinueWithoutFederationConfig) 
                     }
                     else {
-                        Write-ADFSTkLog (Get-ADFSTkLanguageText confAbortDueToIncorrectFederationConfigVersion) -MajorFault #Fix text!
+                        Write-ADFSTkLog (Get-ADFSTkLanguageText confAbortDueToIncorrectFederationConfigVersion) -MajorFault
                     }
                 }
             }
@@ -115,7 +115,7 @@
                         Write-ADFSTkLog (Get-ADFSTkLanguageText confContinueWithoutFederationConfig) 
                     }
                     else {
-                        Write-ADFSTkLog (Get-ADFSTkLanguageText confAbortDueToIncorrectFederationConfigVersion) -MajorFault #Fix text!
+                        Write-ADFSTkLog (Get-ADFSTkLanguageText confAbortDueToIncorrectFederationConfigVersion) -MajorFault
                     }
                 }
             }
@@ -287,7 +287,7 @@
     #region ADFSTkStore Version
     $ADFSTkStoreObject = Get-ADFSTkStore -ReturnAsObject
     if ($ADFSTkStoreObject.ADFSTkStoreIsInstalled -and $ADFSTkStoreObject.SourceDllVersion -ne $ADFSTkStoreObject.InstalledDllVersion) {
-        Write-ADFSTkHost confADFSTkStoreNeedsUpgrade -Style Info -AddLinesOverAndUnder -f $ADFSTkStoreObject.ADFSTkStoreVersion, $Global:ADFSTkCompatibleADFSTkStoreVersion #Check text
+        Write-ADFSTkHost confADFSTkStoreNeedsUpgrade -Style Info -AddLinesOverAndUnder -f $ADFSTkStoreObject.InstalledDllVersion, $ADFSTkStoreObject.SourceDllVersion 
 
         Install-ADFSTkStore
     }
@@ -296,20 +296,20 @@
     #region RefedsMFA/SFA Version
     $ADFSTkMFAAdapters = Get-ADFSTkMFAAdapter -ReturnAsObject
     if (($ADFSTkMFAAdapters.RefedsMFA -or $ADFSTkMFAAdapters.RefedsSFA) -and $ADFSTkMFAAdapters.SourceDllVersion -ne $ADFSTkMFAAdapters.InstalledDllVersion) {
-        Write-ADFSTkHost confADFSTkMFAAdaptersNeedsUpgrade -Style Info -AddLinesOverAndUnder -f $ADFSTkMFAAdapters.InstalledDllVersion, $ADFSTkMFAAdapters.SourceDllVersion #Check text
+        Write-ADFSTkHost confADFSTkMFAAdaptersNeedsUpgrade -Style Info -AddLinesOverAndUnder -f $ADFSTkMFAAdapters.InstalledDllVersion, $ADFSTkMFAAdapters.SourceDllVersion
 
-        if ($RefedsMFA) {
+        if ($ADFSTkMFAAdapters.RefedsMFA) {
             Uninstall-ADFSTkMFAAdapter -RefedsMFA
         }
-        if ($RefedsSFA) {
-            Uninstall-ADFSTkMFAAdapter RefedsSFA
+        if ($ADFSTkMFAAdapters.RefedsSFA ) {
+            Uninstall-ADFSTkMFAAdapter -RefedsSFA
         }
 
-        if ($RefedsMFA) {
+        if ($ADFSTkMFAAdapters.RefedsMFA) {
             Install-ADFSTkMFAAdapter -RefedsMFA
         }
-        if ($RefedsSFA) {
-            Install-ADFSTkMFAAdapter RefedsSFA
+        if ($ADFSTkMFAAdapters.RefedsSFA) {
+            Install-ADFSTkMFAAdapter -RefedsSFA
         }
     }
     #endregion
