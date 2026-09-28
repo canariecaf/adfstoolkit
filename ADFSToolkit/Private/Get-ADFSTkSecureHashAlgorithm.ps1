@@ -8,7 +8,7 @@ param (
     $sp
 )
 #Default hash algorithm if nothing overrides it
-$SignatureAlgorithm = "http://www.w3.org/2000/09/xmldsig#rsa-sha1"
+$SignatureAlgorithm = "http://www.w3.org/2000/09/xmldsig#rsa-sha256"
 
 #check if md:extentions is not null
 if(![string]::IsNullOrEmpty($sp.Extension) -and [string]::IsNullOrEmpty($sp.Extensions.SigningMethod)){
